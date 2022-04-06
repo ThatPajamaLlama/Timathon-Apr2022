@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.center-contents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.flex-container {
+    display: flex;
+}
+
+@font-face {
+    font-family: LouisGeorge;
+    src: url('fnt/Louis\ George\ Cafe.ttf');
+}
+
+@font-face {
+    font-family: LouisGeorgeBold;
+    src: url('fnt/Louis\ George\ Cafe\ Bold.ttf');
+}
+
+#editor {
+    height: 100vh;
+}
+
+#options {
+    background-color: #ccc;
+    width: 25%;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    height: 100vh;
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+
+#options h1 {
+    font-family: Arial;
+    font-weight: bold;
+}
+
+#options h2 {
+    text-align: center;
+    padding-top: 40px;
+    font-family: Arial;
+}
+
+#options form input[type='text'] {
+    display: block;
+    padding: 15px;
+    border-radius: 100px;
+    border: none;
+    width: 70%;
+    margin: 5px auto;
+    text-align: center;
+    font-size: 14pt;
+    font-family: LouisGeorge;
+}
+
+#options form a {
+    display: table;
+    font-size: 24pt;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+    transition-duration: .3s;
+}
+
+#options form a:hover{
+    -webkit-transform: scale(1.3);
+    color: purple;
+    transition-duration: .3s;
+}
+
+#options form input[type='submit'] {
+    width: 70%;
+    display: table;
+    margin: 0 auto;
+    cursor: pointer;
+    padding: 15px;
+    margin-top: 30px;
+    border-radius: 100px;
+    font-family: LouisGeorge;
+    font-size: 14pt;
+    background-color: purple;
+    color: white;
+    border: 2px solid white;
+    transition-duration: .3s;
+}
+
+#options form input[type='submit']:hover {
+    border: 2px solid black;
+    transition-duration: .3s;
+    box-shadow: 3px 3px 5px grey;
+    background-color: rgb(102, 2, 102);
+}
+
+#board {
+    background-color: #ddd;
+    width: 75%;
+}
+
+#board canvas {
+    background-color: white;
+    border: 1px #D3D3D3 solid;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin: 1cm auto;
+    width: 90%;
+
+}
