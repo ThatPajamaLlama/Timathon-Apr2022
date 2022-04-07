@@ -1,2 +1,8 @@
-Homepage Girl - https://pixabay.com/photos/woman-girl-freedom-happy-sun-591576/
+Homepage Image
+https://pixabay.com/photos/woman-girl-freedom-happy-sun-591576/
 Free for commercial use; no attribution required.
+
+tata.js
+https://github.com/xrr2016/tata
+MIT License (Available for use without restriction)
+

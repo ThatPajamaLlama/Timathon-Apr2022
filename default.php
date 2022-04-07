@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+include "assets/inc/toast_helper";
+?>
+
 <!DOCTYPE html>
 <html>
     <?php include "assets/inc/head.php";?>
@@ -59,7 +65,7 @@
                         <p>Feel extraordinary by wearing a unique style.</p>
                     </div>
                     <div>
-                        <i class="fa fa-list" aria-hidden="true"></i>
+                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                         <h2>Daily Activity Generator</h2>
                         <p>Add an element of random to your day by generating an additional activity for today. It could be something as simple as buying something different for lunch.</p>
                     </div>
@@ -79,9 +85,9 @@
                         <div id="login" class="active"><a onclick="ChangeTab('login');">Login</a></div>
                         <div id="signup"><a onclick="ChangeTab('signup');">Signup</a></div>
                     </div>
-                    <input type="text" name="username" id="username" placeholder="Username"/>
-                    <input type="password" name="password" id="password" placeholder="Password"/>
-                    <input type="password" name="password-confirmation" id="password-confirmation" placeholder="Confirm Password"/>
+                    <input type="text" name="username" id="username" placeholder="Username" required maxlength="25"/>
+                    <input type="password" name="password" id="password" placeholder="Password" required maxlength="50"/>
+                    <input type="password" name="password-confirmation" id="password-confirmation" placeholder="Confirm Password" maxlength="50"/>
                     <input type="submit" value="Go"/>
                 </form>
             </section>
@@ -89,6 +95,11 @@
         </div>
     </body>
 </html>
+
+
+<script src="assets/js/tata.js"></script>
+<?php handle_toast(); ?>
+
 
 <script type="text/javascript">
     const form = document.querySelector('section#startnow form');
@@ -102,11 +113,13 @@
             passwordConfirmationInput.style.display = 'none';
             signupTab.classList.remove('active');
             loginTab.classList.add('active');
+            passwordConfirmationInput.required = false;
         } else {
             form.action = "assets/proc/signup_process.php";
             passwordConfirmationInput.style.display = 'block';
             loginTab.classList.remove('active');
             signupTab.classList.add('active');
+            passwordConfirmationInput.required = true;
         }
     }
 </script>
