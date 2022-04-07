@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include "assets/inc/toast_helper";
+include "assets/inc/toast_helper.php";
 ?>
 
 <!DOCTYPE html>

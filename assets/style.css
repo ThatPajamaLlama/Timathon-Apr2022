@@ -66,7 +66,7 @@ body#default {
 }
 
 
-header {
+#default header {
     position: fixed;
     top: 0;
     z-index: 1;
@@ -99,13 +99,13 @@ header h1#logo {
 }
 
 
-.action-button a {
+.navbar .action-button a {
     padding: 0.5rem 1rem;
     background-color: #9C1FD6;
     border-radius: 5px;
 }
 
-.action-button a:hover {
+.navbar .action-button a:hover {
     background-color: #8219B3;
 }
 .navbar ul li a {
@@ -333,6 +333,71 @@ section#startnow form input[type='submit'] {
 
 section#startnow form input[type='submit']:hover {
     background-color: #8219B3;
+}
+
+
+/* --------------- User Area Layout --------------- */
+
+.user-area header {
+    width: 20%;
+    background-color: #111;
+}
+
+.user-area header #logo {
+    text-shadow: 0px 0px 10px #9C1FD6;
+    padding: 20px 0;
+}
+
+.user-area .sidemenu {
+    padding: 20px;
+}
+
+.user-area .sidemenu ul {
+    list-style-type: none;
+}
+
+.user-area header h2 {
+    border-bottom: 1px solid #9C1FD6;
+    padding: 15px 0 5px 0;
+    font-family: Elbrush;
+    font-weight: normal;
+    letter-spacing: 1px;
+    color: #9C1FD6;
+}
+
+.user-area header ul i {
+    display: inline-block;
+    width: 20px;
+    margin-right: 12px;
+    color: white;
+    text-align: center;
+}
+
+.user-area header a {
+    font-size: 14pt;
+    color: #eee;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 10px;
+    display: block;
+    margin: 5px 0;
+}
+
+.user-area header a.active{
+    background-color: #222;
+}
+
+.user-area header a.active i{
+    color: #9C1FD6;
+}
+
+.user-area header a:not(.active):hover {
+    background-color: #9C1FD6;
+}
+
+.user-area main {
+    width: 80%;
+    background-color: #eee;
 }
 
 /* --------------- Vision Board Creation --------------- */

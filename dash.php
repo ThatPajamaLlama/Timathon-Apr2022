@@ -1,15 +1,17 @@
 <?php
-
 session_start();
-echo "<h1>You are logged in</h1>";
-echo "<p>" . $_SESSION['username'] . "</p>";
 
 ?>
 
+<!DOCTYPE html>
+<html>
+    <?php include "assets/inc/head.php";?>
+    <body id="dash" class="user-area flex-container">
+        <?php include "assets/inc/sidemenu.php";?>
+        
+        <main>
+            Change today, or change everyday?
+        </main>
 
-<script src="assets/js/tata.js"></script>
-<script>
-    tata.error("Login failed", "Incorrect password", {
-        position: 'br'
-    });
-</script>
+    </body>
+</html>
