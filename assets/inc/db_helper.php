@@ -79,6 +79,9 @@ function db_input($conn, $name, $method){
 		case "post":
 			$value = (isset($_POST[$name]) ? mysqli_real_escape_string($conn, $_POST[$name]) : "");
 			break;
+		case "session":
+			$value = (isset($_SESSION[$name]) ? mysqli_real_escape_string($conn, $_SESSION[$name]) : "");
+			break;
 	}
 	return $value;
 }

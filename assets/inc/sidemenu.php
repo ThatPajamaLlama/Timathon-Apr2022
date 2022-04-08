@@ -16,7 +16,7 @@
         </ul>
         <h2>Peer Support</h2>
         <ul>
-            <li><a href="dash.php"><i class="fa fa-comment" aria-hidden="true"></i>Share with Others!</a></li>
+            <li><a href="peersupport.php"><i class="fa fa-comment" aria-hidden="true"></i>Share with Others!</a></li>
         </ul>
         <h2>Account</h2>
         <ul>
