@@ -629,15 +629,12 @@ section#startnow form input[type='submit']:hover {
     overflow-y: scroll;
 }
 
-#options h1 {
-    font-family: Arial;
-    font-weight: bold;
-}
-
 #options h2 {
     text-align: center;
     padding-top: 40px;
-    font-family: Arial;
+    font-family: Elbrush;
+    font-size: 20pt;
+    font-weight: normal;
 }
 
 #options form input[type='text'] {
@@ -645,7 +642,7 @@ section#startnow form input[type='submit']:hover {
     padding: 15px;
     border-radius: 100px;
     border: none;
-    width: 70%;
+    width: 100%;
     margin: 5px auto;
     text-align: center;
     font-size: 14pt;
@@ -663,7 +660,7 @@ section#startnow form input[type='submit']:hover {
 
 #options form a:hover{
     -webkit-transform: scale(1.3);
-    color: purple;
+    color: #9C1FD6;
     transition-duration: .3s;
 }
 
@@ -677,7 +674,7 @@ section#startnow form input[type='submit']:hover {
     border-radius: 100px;
     font-family: LouisGeorge;
     font-size: 14pt;
-    background-color: purple;
+    background-color: #9C1FD6;
     color: white;
     border: 2px solid white;
     transition-duration: .3s;

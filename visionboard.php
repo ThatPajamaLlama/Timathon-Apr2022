@@ -1,12 +1,18 @@
+<?php
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html>
     <?php include "assets/inc/head.php";?>
-    <body id="vision-board-creator">
+    <body id="activity-randomiser" class="user-area flex-container generator">
+        <?php include "assets/inc/sidemenu.php";?>
+        
+        <main>
         <div id="editor" class="flex-container">
             <div id="options">
                 <form onsubmit="DrawBoard(this, ctx); return false;">
-                    <h1>Vision Board</h1>
-
                     <h2>Text</h2>
                     <div id="text-inputs">
                         <input type="text" id="text-1" placeholder="Text"/>
@@ -29,9 +35,10 @@
                 </canvas>
             </div>
         </div>
+        </main>
+
     </body>
 </html>
-
 
 <script src="assets/js/canvas_setup.js"></script>
 
