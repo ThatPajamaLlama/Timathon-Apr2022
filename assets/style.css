@@ -456,12 +456,36 @@ section#startnow form input[type='submit']:hover {
 #peer-support .post {
     background-color: #ddd;
     margin: 20px 80px;
-    padding: 10px;
+    padding: 15px;
     border-radius: 5px;
+}
+
+#peer-support .comments textarea {
+    width: 100%;
+    padding: 7px;
+    border-radius: 15px;
+    background-color: #eee;
+    border: 0;
+    margin-top: 20px;
+    font-family: LouisGeorge;
+    font-size: 12pt;
+    resize: none;
+}
+
+#peer-support .comment {
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 10px;
+    margin: 10px 0;
 }
 
 #peer-support .post .user {
     color:#9C1FD6;
+}
+
+#peer-support .comment .user {
+    color: black;
+    font-size: 12pt;
 }
 
 #peer-support .post .timestamp {
@@ -469,44 +493,35 @@ section#startnow form input[type='submit']:hover {
     font-weight: bold;
     font-size: 12pt;
     position: relative;
-    margin: 10px 0;
+    margin: 5px 0;
+
+}
+
+#peer-support .comment .timestamp {
+    font-size: 10pt;
+    margin: 0;
+}
+
+
+.timestamp h2 {
+    display: inline;
+    font-size: 12pt;
     cursor: pointer;
 }
 
-#peer-support .post .timestamp .timestamp-tooltip {
-    visibility: hidden;
-}
-
-
-
-
 .timestamp-tooltip {
     visibility: hidden;
-    width: 150px;
-    background-color: black;
+    background-color: #111;
     color: #fff;
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    top: -5px;
-    left: 5%;
-    padding: 5px 0;
-  }
-  
-  .timestamp-tooltip::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 100%;
-    margin-top: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent black transparent transparent;
+    margin-left: 10px;
+    padding: 2px 10px;
+    font-weight: normal;
   }
 
-#peer-support .post .timestamp:hover .timestamp-tooltip {
+#peer-support .post .timestamp h2:hover + .timestamp-tooltip {
     visibility: visible;
 }
 
