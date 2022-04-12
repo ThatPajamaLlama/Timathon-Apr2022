@@ -20,41 +20,6 @@ session_start();
             </section>
             <section id="posts">
                 <!-- Shows all posts from all users -->
-                <article id="post-12" class="post">
-                    <h1 class="user">MyNameIsShannon</h1>
-                    <div class="timestamp">
-                        <h2><span class="timeago">2d</span> · <i class="fa fa-clock-o" aria-hidden="true"></i></h2>
-                        <span class="timestamp-tooltip">Saturday, 9 April 2022 at 17:45</span>
-                    </div>
-                    <div class="text">
-                        <p>I had something new for breakfast today - Waffles! Making the day different nice and early this morning...</p>
-                    </div>
-                    <div class="comments">
-                        <textarea name="comment" rows="1" placeholder="Write a comment..."></textarea>
-                        <div class="comment">
-                            <div class="comment-header">
-                                <h1 class="user">adam</h1>
-                                <h2 class="timestamp"><span class="timeago">2d</span> · <i class="fa fa-clock-o" aria-hidden="true"></i><span class="timestamp-tooltip">Saturday, 9 April 2022 at 17:45</span></h2>
-                            </div>
-                            <p>Oooh you can't go wrong there! Perfect start to the perfect day.</p>
-                        </div>
-                        <div class="comment">
-                            <div class="comment-header">
-                                <h1 class="user">samantha_panther</h1>
-                                <h2 class="timestamp"><span class="timeago">2d</span> · <i class="fa fa-clock-o" aria-hidden="true"></i><span class="timestamp-tooltip">Saturday, 9 April 2022 at 17:45</span></h2>
-                            </div>
-                            <p>You've just inspired me to make blueberry pancakes.</p>
-                            <p>The dog will be upset to know that I won't be sharing my toast this morning though :(</p>
-                        </div>
-                        <div class="comment">
-                            <div class="comment-header">
-                                <h1 class="user">x_RickyRoo_x</h1>
-                                <h2 class="timestamp"><span class="timeago">2d</span> · <i class="fa fa-clock-o" aria-hidden="true"></i><span class="timestamp-tooltip">Saturday, 9 April 2022 at 17:45</span></h2>
-                            </div>
-                            <p>Sharing is caring :D</p>
-                        </div>
-                    </div>
-                </article>
             </section>
         </main>
 
@@ -67,8 +32,8 @@ session_start();
     var thesePosts = [];
 
     window.onload = function() {
-        // DisplayPosts();
-        // setInterval(UpdatePosts, 1000);
+        DisplayPosts();
+        setInterval(UpdatePosts, 1000);
     }
 
     function CreatePost(e, form) {
@@ -85,6 +50,26 @@ session_start();
             request.open("POST", "assets/proc/create_post_process.php", true);
             request.send(new FormData(form));
         }       
+    }
+
+    function CreateComment(e, input) {
+        if (e.key == "Enter"){
+            var postId = input.parentNode.parentNode.id.split("-")[1];
+
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    input.value = "";
+                    UpdatePosts();
+                }
+            };
+
+            var data = new FormData();
+            data.append("postId", postId);
+            data.append("comment", input.value);
+            request.open("POST", "assets/proc/create_comment_process.php", true);
+            request.send(data);
+        }
     }
 
     
@@ -105,6 +90,20 @@ session_start();
                     details['text'].forEach(function(paragraph) {
                         html +=    "<p>" + paragraph + "</p>";
                     });     
+                    html +=    "</div>";
+                    html +=    "</div>";
+                    html +=    "<div class='comments'>";
+                    html +=    "<textarea name='comment' rows='1' placeholder='Write a comment...' onkeyup='return CreateComment(event, this);'></textarea>";
+                    for (const [commentId, comment] of Object.entries(details['comments'])) {
+                        html +=    "<div id='comment-" + commentId.replaceAll("'", "") + "' class='comment'>";
+                        html +=        "<h1 class='user'>" + comment['username'] + "</h1>";
+                        html +=        "<div class='timestamp'>";
+                        html +=            "<h2><span class='timeago'>" + comment['timeago'] + "</span> · <i class='fa fa-clock-o' aria-hidden='true'></i></h2>";
+                        html +=            "<span class='timestamp-tooltip'>" + comment['timestamp'] + "</span>";
+                        html +=        "</div>";
+                        html +=        "<p>" + comment['text'] + "</p>";
+                        html +=    "</div>";
+                    }  
                     html +=    "</div>";
                     html += "</article>";
                 }                  
@@ -128,6 +127,8 @@ session_start();
                     if (lastPosts[id] !== undefined) {
                         if (JSON.stringify(details['timeago']) !== JSON.stringify(lastPosts[id]['timeago'])) {
                             ChangeTimeago(id, details['timeago']);
+                        } else if (JSON.stringify(details['comments']) !== JSON.stringify(lastPosts[id]['comments'])){
+                            ChangeComments(id, details['comments'], lastPosts[id]['comments']);
                         }
                     } else {
                         ShowNewPost(id, details);
@@ -147,6 +148,49 @@ session_start();
         post.querySelector('span.timeago').innerHTML = newTimeago;
     }
 
+    function ChangeComments(postId, comments, oldComments) {
+        var commentSection = document.querySelector("#post-" + postId.replaceAll("'", "") + " .comments");
+
+        for (const [id, details] of Object.entries(comments)) { 
+            if (oldComments[id] === undefined) {
+                var newComment = document.createElement("div");
+                newComment.setAttribute("id", "comment-" + id.replaceAll("'", ""));
+                newComment.setAttribute("class", "comment");
+                html =        "<h1 class='user'>" + details['username'] + "</h1>";
+                html +=        "<div class='timestamp'>";
+                html +=            "<h2><span class='timeago'>" + details['timeago'] + "</span> · <i class='fa fa-clock-o' aria-hidden='true'></i></h2>";
+                html +=            "<span class='timestamp-tooltip'>" + details['timestamp'] + "</span>";
+                html +=        "</div>";
+                html +=        "<p>" + details['text'] + "</p>";
+                newComment.innerHTML = html;
+                commentSection.appendChild(newComment);
+            } else if (details['timeago'] != oldComments[id]['timeago']) {
+                var comment = commentSection.querySelector("#comment-" + id.replaceAll("'", ""));
+                comment.querySelector('span.timeago').innerHTML = details['timeago'];
+            }
+        }
+
+        // comments.forEach(function(comment) {
+        //     console.log(oldComments);
+        //     console.log(comments);
+        //     if (comment in oldComments) {
+        //         console.log("exists");
+        //     } else {
+        //         console.log("doesn't exist");
+        //     }
+        //     html +=    "<div class='comment'>";
+        //     html +=        "<h1 class='user'>" + comment['username'] + "</h1>";
+        //     html +=        "<div class='timestamp'>";
+        //     html +=            "<h2><span class='timeago'>" + comment['timeago'] + "</span> · <i class='fa fa-clock-o' aria-hidden='true'></i></h2>";
+        //     html +=            "<span class='timestamp-tooltip'>" + comment['timestamp'] + "</span>";
+        //     html +=        "</div>";
+        //     html +=        "<p>" + comment['text'] + "</p>";
+        //     html +=    "</div>";
+        // });  
+
+
+    }
+
     function ShowNewPost(id, details) {
         var newPost = document.createElement("article");
         newPost.setAttribute("id", "post-" + id.replaceAll("'", ""));
@@ -161,6 +205,9 @@ session_start();
         details['text'].forEach(function(paragraph) {
             html +=    "<p>" + paragraph + "</p>";
         });     
+        html +=    "</div>";
+        html +=    "<div class='comments'>";
+        html +=    "<textarea name='comment' rows='1' placeholder='Write a comment...'></textarea>";
         html +=    "</div>";
         newPost.innerHTML = html;
 

@@ -486,6 +486,7 @@ section#startnow form input[type='submit']:hover {
 #peer-support .comment .user {
     color: black;
     font-size: 12pt;
+    display: inline;
 }
 
 #peer-support .post .timestamp {
@@ -498,6 +499,11 @@ section#startnow form input[type='submit']:hover {
 }
 
 #peer-support .comment .timestamp {
+    display: inline;
+    margin-left: 10px;
+}
+
+#peer-support .comment .timestamp h2 {
     font-size: 10pt;
     margin: 0;
 }
@@ -527,6 +533,10 @@ section#startnow form input[type='submit']:hover {
 
 #peer-support .post .text p {
     padding-bottom: 5px;
+}
+
+#peer-support .comment p {
+    padding: 3px 0;
 }
 
 

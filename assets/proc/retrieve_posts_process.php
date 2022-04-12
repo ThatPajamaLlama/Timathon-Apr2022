@@ -33,6 +33,27 @@ function split_text($text) {
     return $paragraphs;
 }
 
+function retrieve_comments($conn, $id, $currentDateTime) {
+    $rsComments = db_query($conn, "SELECT * FROM comment WHERE post_id = $id ORDER BY datetime ASC");
+
+    $comments = [];
+    for ($i = 1; $i <= mysqli_num_rows($rsComments); $i++) {
+        $comment = mysqli_fetch_assoc($rsComments);
+        $timestamp = new DateTime($comment['datetime']);
+        $timeAgo = calculate_time_ago($timestamp, $currentDateTime);
+        $timestamp = date_format($timestamp, 'l, j F Y \a\t H:i');
+
+        $comments["'" .  $comment['id'] . "'"] = [
+            "username" => $comment['user_id'],
+            "text" => $comment['text'],
+            "timestamp" => $timestamp,
+            "timeago" => $timeAgo
+        ];
+    }
+
+    return $comments;
+}
+
 session_start();
 
 include "../inc/db_helper.php";
@@ -59,9 +80,13 @@ for ($i = 1; $i <= mysqli_num_rows($rsAllPosts); $i++) {
         "username" => $username,
         "timestamp" => $timestamp,
         "timeago" => $timeAgo,
-        "text" => $text
-        ];
+        "text" => $text,
+        "comments" => retrieve_comments($conn, $id, $currentDateTime)
+    ];
 }
+
+// $pretty = json_encode($posts, JSON_PRETTY_PRINT);
+// echo "<pre>" . $pretty . "</pre>";
 
 print_r(json_encode($posts));
 
