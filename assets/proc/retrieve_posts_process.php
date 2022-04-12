@@ -43,7 +43,7 @@ function retrieve_comments($conn, $id, $currentDateTime) {
         $timeAgo = calculate_time_ago($timestamp, $currentDateTime);
         $timestamp = date_format($timestamp, 'l, j F Y \a\t H:i');
 
-        $comments["'" .  $comment['id'] . "'"] = [
+        $comments["'" . $comment['id'] . "'"] = [
             "username" => $comment['user_id'],
             "text" => $comment['text'],
             "timestamp" => $timestamp,
@@ -59,7 +59,17 @@ session_start();
 include "../inc/db_helper.php";
 $conn = db_connect();
 
-$rsAllPosts = db_query($conn, "SELECT * FROM post ORDER BY id DESC");
+$username = $_SESSION['username'];
+
+$sqlAllPosts = "SELECT post.id AS thisone, post.*, COUNT(post_like.post_id) AS likes, (SELECT 1
+                                                                                        FROM post_like
+                                                                                        WHERE post_like.user_id = '$username'
+                                                                                        AND post_like.post_id = thisone) AS user_liked
+                FROM post
+                LEFT JOIN post_like ON post.id = post_like.post_id
+                GROUP BY post.id
+                ORDER BY post.id DESC";
+$rsAllPosts = db_query($conn, $sqlAllPosts);
 
 $posts = [];
 $currentDateTime = new DateTime();
@@ -68,6 +78,8 @@ for ($i = 1; $i <= mysqli_num_rows($rsAllPosts); $i++) {
     $post = mysqli_fetch_assoc($rsAllPosts);
     $id = $post['id'];
     $username = $post['user_id'];
+    $likes = $post['likes'];
+    $userLiked = $post['user_liked'] == 1 ? "1" : "0";
 
     $timestamp = new DateTime($post['timestamp']);
 
@@ -76,11 +88,13 @@ for ($i = 1; $i <= mysqli_num_rows($rsAllPosts); $i++) {
     
 
     $text = split_text($post['text']);
-    $posts["'" .  $id . "'"] = [
+    $posts["'" . $id . "'"] = [
         "username" => $username,
         "timestamp" => $timestamp,
         "timeago" => $timeAgo,
         "text" => $text,
+        "likes" => $likes,
+        "userliked" => $userLiked,
         "comments" => retrieve_comments($conn, $id, $currentDateTime)
     ];
 }

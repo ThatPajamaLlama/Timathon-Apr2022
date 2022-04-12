@@ -5,9 +5,9 @@ include "../inc/db_helper.php";
 $conn = db_connect();
 
 session_start();
-$username = db_input($conn, "username", "session");
-$postId = db_input($conn, "postId", "post");
-$text = db_input($conn, "comment", "post");
+$username = $_SESSION['username'];
+$postId = $_POST['postId'];
+$text = $_POST['comment'];
 $text = str_replace("\\r\\n", "", $text);
 $timestamp = date_format(new DateTime(), "Y-m-d H:i:s");
 

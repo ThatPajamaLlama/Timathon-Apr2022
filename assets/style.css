@@ -540,6 +540,58 @@ section#startnow form input[type='submit']:hover {
 }
 
 
+
+
+table.likes {
+    border-spacing: 0;
+  }
+  
+  table.likes td:first-child{
+    background-color: #111;
+    color: white;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    transition-duration: .3s;
+    cursor: pointer;
+  }
+
+  table.likes.active td:first-child{
+    background-color: #9C1FD6;
+    color: white;
+  }
+
+    table.likes td:first-child:hover {
+        transition-duration: .3s;
+    }
+
+  table.likes:not(.active) td:first-child:hover {
+    background-color: #9C1FD6;
+  }
+  
+
+  table.likes.active td:first-child:hover {
+    background-color: #111;
+  }
+  
+  table.likes td:last-child{
+    background-color: white;
+    color: #222;
+    font-family: LouisGeorge;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  
+  table.likes .fa-thumbs-up, table.likes span {
+    padding: 5px;
+  }
+  
+  table.likes a {
+    color: white;
+  }
+  
+
+
+
 /* --------------- Style Generator --------------- */
 
 .generator #container {
