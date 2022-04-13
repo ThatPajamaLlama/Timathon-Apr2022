@@ -15,6 +15,7 @@ My interpretation of this theme, which led to the creation of various features, 
 ## Approach & Features
 
 The languages/technologies used in the development of this entry include:
+
 ![HTML5](https://img.shields.io/static/v1?label=&message=HTML5&color=e44d26&style=flat&logo=HTML5&logoColor=white)
 ![CSS3](https://img.shields.io/static/v1?label=&message=CSS3&color=2965f1&style=flat&logo=CSS3&logoColor=white)
 ![JavaScript](https://img.shields.io/static/v1?label=&message=JavaScript&color=f7df1e&style=flat&logo=JavaScript&logoColor=white)
@@ -30,5 +31,14 @@ The languages/technologies used in the development of this entry include:
 | Bucket List         |        |
 | Sharing Platform    |        |
 
+**Style Generator**
+
+**Activity Randomiser**
+
+**Vision Board**
+
+**Bucket List**
+
+**Sharing Platform**
 
 ## Project Recreation
