@@ -26,6 +26,8 @@ session_start();
     </body>
 </html>
 
+<script src="assets/js/tata.js"></script>
+
 <script>
 
     var lastPosts = [];
@@ -44,6 +46,9 @@ session_start();
                 if (this.readyState == 4 && this.status == 200) {
                     form.querySelector('#post').value = "";
                     UpdatePosts();
+                    tata.success('Created Post', 'Thanks for sharing!', {
+                        position: 'br'
+                    });
                 }
             };
             request.open("POST", "assets/proc/create_post_process.php", true);
@@ -77,6 +82,9 @@ session_start();
                 if (this.readyState == 4 && this.status == 200) {
                     input.value = "";
                     UpdatePosts();
+                    tata.success('Posted Comment', 'Wahoo - supporting others!', {
+                        position: 'br'
+                    });
                 }
             };
 

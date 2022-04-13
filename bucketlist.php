@@ -31,6 +31,8 @@ session_start();
     </body>
 </html>
 
+<script src="assets/js/tata.js"></script>
+
 <script>
     // First time display of list
     window.onload = function() {
@@ -66,6 +68,9 @@ session_start();
                 if (this.readyState == 4 && this.status == 200) {
                     form.querySelector('#item').value = "";
                     DisplayItems();
+                    tata.success('Bucket List Changed', 'New item added', {
+                        position: 'br'
+                    });
                 }
             };
             request.open("POST", "assets/proc/add_bucket_list_item_process.php", true);
@@ -80,6 +85,9 @@ session_start();
         request.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 DisplayItems();
+                tata.success('Bucket List Changed', 'Item removed', {
+                    position: 'br'
+                });
             }
         };
         request.open("POST", "assets/proc/remove_bucket_list_item_process.php?id=" + itemId, true);
@@ -93,6 +101,15 @@ session_start();
         request.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 DisplayItems();
+                if (completionStatus == 1) { 
+                    tata.success('Bucket List Changed', 'Activity marked as complete', {
+                        position: 'br'
+                    });
+                } else {
+                    tata.success('Bucket List Changed', 'Activity marked as incomplete', {
+                        position: 'br'
+                    });
+                }
             }
         };
         var data = new FormData();

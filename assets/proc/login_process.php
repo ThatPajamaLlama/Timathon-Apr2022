@@ -18,6 +18,11 @@ if (mysqli_num_rows($rsUser) == 1) {
     $password = $_POST['password'];
     if (password_verify($password, $details['password'])) {
         $_SESSION['username'] = $details['username'];
+        $_SESSION['toast'] = [
+            "type" => "success",
+            "header" => "Logged In",
+            "message" => "Welcome back!"
+        ];
         header('location: ../../dash.php');
     } else {
         $_SESSION['toast'] = [

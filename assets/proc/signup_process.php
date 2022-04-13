@@ -36,6 +36,13 @@ if (mysqli_num_rows($rsExistingUser) != 0) {
         $rsAddUser = db_prep_stmt($conn, $sqlAddUser, $valuesAddUser);
         
         $_SESSION['username'] = $username;
+
+        $_SESSION['toast'] = [
+            "type" => "success",
+            "header" => "Signed Up",
+            "message" => "Your account has been created"
+        ];
+
         header('location: ../../dash.php');
     } else {
         $_SESSION['toast'] = [

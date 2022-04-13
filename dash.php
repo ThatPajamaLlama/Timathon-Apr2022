@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+include "assets/inc/toast_helper.php";
 ?>
 
 <!DOCTYPE html>
@@ -15,3 +16,7 @@ session_start();
 
     </body>
 </html>
+
+
+<script src="assets/js/tata.js"></script>
+<?php handle_toast(); ?>
