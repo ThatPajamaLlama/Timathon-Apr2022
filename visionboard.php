@@ -6,7 +6,7 @@ session_start();
 <!DOCTYPE html>
 <html>
     <?php include "assets/inc/head.php";?>
-    <body id="activity-randomiser" class="user-area flex-container generator">
+    <body id="vision-board" class="user-area flex-container">
         <?php include "assets/inc/sidemenu.php";?>
         
         <main>

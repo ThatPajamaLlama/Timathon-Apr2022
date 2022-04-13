@@ -692,11 +692,11 @@ table.likes {
 
 /* --------------- Vision Board Creation --------------- */
 
-#editor {
+#vision-board #editor {
     height: 100vh;
 }
 
-#options {
+#vision-board #options {
     background-color: #ccc;
     width: 25%;
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
@@ -706,7 +706,7 @@ table.likes {
     overflow-y: scroll;
 }
 
-#options h2 {
+#vision-board #options h2 {
     text-align: center;
     padding-top: 40px;
     font-family: Elbrush;
@@ -714,7 +714,7 @@ table.likes {
     font-weight: normal;
 }
 
-#options form input[type='text'] {
+#vision-board #options form input[type='text'] {
     display: block;
     padding: 15px;
     border-radius: 100px;
@@ -726,7 +726,7 @@ table.likes {
     font-family: LouisGeorge;
 }
 
-#options form a {
+#vision-board #options form a {
     display: table;
     font-size: 24pt;
     text-align: center;
@@ -735,13 +735,13 @@ table.likes {
     transition-duration: .3s;
 }
 
-#options form a:hover{
+#vision-board #options form a:hover{
     -webkit-transform: scale(1.3);
     color: #9C1FD6;
     transition-duration: .3s;
 }
 
-#options form input[type='submit'] {
+#vision-board #options form input[type='submit'] {
     width: 70%;
     display: table;
     margin: 0 auto;
@@ -757,19 +757,19 @@ table.likes {
     transition-duration: .3s;
 }
 
-#options form input[type='submit']:hover {
+#vision-board #options form input[type='submit']:hover {
     border: 2px solid black;
     transition-duration: .3s;
     box-shadow: 3px 3px 5px grey;
     background-color: rgb(102, 2, 102);
 }
 
-#board {
+#vision-board #board {
     background-color: #ddd;
     width: 75%;
 }
 
-#board canvas {
+#vision-board #board canvas {
     background-color: white;
     border: 1px #D3D3D3 solid;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -777,3 +777,62 @@ table.likes {
     width: 90%;
 
 }
+
+/* --------------- Bucket List --------------- */
+#bucket-list section {
+    padding: 80px;
+}
+
+#bucket-list #editor {
+    width: 50%;
+    /* background-color: red; */
+}
+
+#bucket-list #editor form input{
+    width: 90%;
+    padding: 7px;
+    border-radius: 15px;
+    background-color: #fff;
+    border: 0;
+    font-family: LouisGeorge;
+    font-size: 12pt;
+    resize: none;
+}
+
+#bucket-list #editor form button {
+    /* width: 10%; */
+    /* background-color: red; */
+    border: none;
+    font-size: 24pt;
+    margin: 0 20px;
+    color: #8AC926;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #71a71a;
+    cursor: pointer;
+}
+
+#bucket-list #editor table#list {
+    padding: 20px 0;
+    font-size: 13pt;
+}
+
+#bucket-list #editor table#list td {
+    padding: 5px 8px;
+}
+
+#bucket-list #editor table#list input[type='checkbox'] {
+    transform: scale(1.5);
+}
+
+#bucket-list #editor table#list a.remove-button {
+    color: #FF595E;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #ce4246;
+    font-size: 16pt;
+    cursor: pointer;
+}
+
+#bucket-list #info {
+    width: 50%;
+}
+
