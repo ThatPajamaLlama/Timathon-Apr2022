@@ -10,31 +10,32 @@ session_start();
         <?php include "assets/inc/sidemenu.php";?>
         
         <main>
-        <div id="editor" class="flex-container">
-            <div id="options">
-                <form onsubmit="DrawBoard(this, ctx); return false;">
-                    <h2>Text</h2>
-                    <div id="text-inputs">
-                        <input type="text" id="text-1" placeholder="Text"/>
-                    </div>
-                    <a onclick="AddInput('text');"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
 
-                    <h2>Imagery</h2>
-                    <div id="image-inputs">
-                        <input type="text" id="image-1" placeholder="Image (Link)"/>
-                    </div>
-                    <a onclick="AddInput('image');"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+            <div id="editor" class="flex-container">
+                <div id="options">
+                    <form onsubmit="DrawBoard(this, ctx); return false;">
+                        <h2>Text</h2>
+                        <div id="text-inputs">
+                            <input type="text" id="text-1" placeholder="Text"/>
+                        </div>
+                        <a onclick="AddInput('text');"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
 
-                    <input type="submit" value="Draw"/>
-                </form>
-                
-            </div>
-            <div id="board" class="center-contents">
-                <canvas>
+                        <h2>Imagery</h2>
+                        <div id="image-inputs">
+                            <input type="text" id="image-1" placeholder="Image (Link)"/>
+                        </div>
+                        <a onclick="AddInput('image');"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+
+                        <input type="submit" value="Draw"/>
+                    </form>
                     
-                </canvas>
+                </div>
+                <div id="board" class="center-contents">
+                    <canvas>
+                        
+                    </canvas>
+                </div>
             </div>
-        </div>
         </main>
 
     </body>

@@ -8,7 +8,7 @@ tata.js
 https://github.com/xrr2016/tata
 MIT License (Available for use without restriction)
 
-
+Fontawesome
 
 ------------------------------------
 |                                  |
