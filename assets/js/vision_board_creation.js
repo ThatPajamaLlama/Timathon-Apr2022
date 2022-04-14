@@ -8,6 +8,57 @@ const widths = [200, 250, 300, 350];
 // Array of drawn objects on canvas
 var drawnObjects = [];
 
+window.onload = function() {
+    LoadBoard(ctx);
+}
+
+function LoadBoard(ctx) {
+    var boardId = new URLSearchParams(window.location.search).get('id');
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = JSON.parse(this.responseText);
+            for (const [type, objects] of Object.entries(response)) {
+                if (type == "text") {
+                    var counter = 0;
+                    objects.forEach(function(text) {
+                        counter = counter + 1;
+                        if (counter != 1){
+                            AddInput("text");
+                        }
+                        document.querySelector('#text-' + counter).value = text["text"];
+                        ctx.font = text["size"] + "px " + text["font"];
+                        ctx.fillStyle = text["colour"];
+                        ctx.fillText(text["text"], text["x"], text["y"]);
+                    });
+                } else if (type == "images") {
+                    var counter = 0;
+                    objects.forEach(function(image) {
+                        counter = counter + 1;
+                        if (counter != 1){
+                            AddInput("image");
+                        }
+                        document.querySelector('#image-' + counter).value = image["path"];
+                        var imgObj = new Image();
+                        imgObj.onload = function () {
+                            ctx.drawImage(imgObj, image["x"], image["y"], image["width"], image["height"]);
+                        };
+                        imgObj.src = image["path"];
+                    });
+                }   
+            }
+        }
+    };
+    var link = "assets/proc/retrieve_vision_board_process.php?id=" + boardId;
+    request.open("POST", link, true);
+    request.send();
+
+}
+
+
+
+
+
 /*
  * Draws the vision board in its entirety
  * @param form - the form DOM element
@@ -90,7 +141,6 @@ function DrawText(ctx, text) {
  */
 function DrawImage(ctx, text) {
     var imgObj = new Image();
-
     imgObj.src = text;
 
     imgObj.onload = function() {
@@ -106,12 +156,13 @@ function DrawImage(ctx, text) {
             if (selectedPosition["x"] + newWidth <= canvas.width && selectedPosition["y"] + newHeight <= canvas.height) {
                 if (!ObjectIntersection(selectedPosition["x"], selectedPosition["x"] + newWidth, selectedPosition["y"], selectedPosition["y"] + newHeight)){
                     suitablePlacement = true;
+                    ctx.drawImage(imgObj, selectedPosition["x"], selectedPosition["y"], newWidth, newHeight);
                 }
             }
         }
 
         // Draw image to canvas
-        ctx.drawImage(imgObj, selectedPosition["x"], selectedPosition["y"], newWidth, newHeight);
+        
 
         // Add full positioning details to drawnObjects array
         drawnObjects.push({
@@ -175,13 +226,13 @@ function AddInput(type) {
     if (type == "text") {
         var newText = document.createElement('input');
         newText.type = "text";
-        newText.id = "text-" + (lastInt - 1);
+        newText.id = "text-" + (lastInt + 1);
         newText.placeholder = "Text";
         textInputs.appendChild(newText);
     } else {
         var newImage = document.createElement('input');
         newImage.type = "text";
-        newImage.id = "image-" + (lastInt - 1);
+        newImage.id = "image-" + (lastInt + 1);
         newImage.placeholder = "Image (Link)";
         imageInputs.appendChild(newImage);
     }

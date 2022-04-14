@@ -59,7 +59,6 @@ session_start();
                     html += "</tr>";
                 }
                 document.querySelector('table#list').innerHTML = html;
-                thesePosts = response;
             }
         };
         request.open("POST", "assets/proc/retrieve_bucket_list_process.php", true);
