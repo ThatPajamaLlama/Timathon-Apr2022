@@ -41,6 +41,7 @@ session_start();
     </body>
 </html>
 
+<script src="assets/js/tata.js"></script>
 <script src="assets/js/canvas_setup.js"></script>
 
 <script src="assets/js/vision_board_creation.js"></script>

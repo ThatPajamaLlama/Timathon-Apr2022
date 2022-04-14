@@ -7,13 +7,13 @@ const widths = [200, 250, 300, 350];
 
 // Array of drawn objects on canvas
 var drawnObjects = [];
+const boardId = new URLSearchParams(window.location.search).get('id');
 
 window.onload = function() {
     LoadBoard(ctx);
 }
 
 function LoadBoard(ctx) {
-    var boardId = new URLSearchParams(window.location.search).get('id');
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -64,7 +64,7 @@ function LoadBoard(ctx) {
  * @param form - the form DOM element
  * @param ctx - context for drawing to canvas
  */
-function DrawBoard(form, ctx) {
+async function DrawBoard(form, ctx) {
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawnObjects = [];
@@ -83,7 +83,30 @@ function DrawBoard(form, ctx) {
         DrawText(ctx, text.value);
     }
 
-    console.log(drawnObjects);
+    var ready = false;
+    while (!ready) {
+        await new Promise(r => setTimeout(r, 1000));
+        if (drawnObjects.length == document.querySelectorAll("form input[type='text']").length) {
+            ready = true;
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    tata.success('Vision Board Updated', 'New version saved', {
+                        position: 'br'
+                    });
+                }
+            };
+            var data = new FormData();
+            data.append("data", JSON.stringify(drawnObjects));
+            // for (var value of data.values()) {
+            //     console.log(value);
+            //  }
+            request.open("POST", "assets/proc/save_vision_board_process.php?id=" + boardId, true);
+            request.send(data);
+        }
+    }
+
+    
 }
 
 /*
@@ -106,8 +129,9 @@ function DrawText(ctx, text) {
 
     // Ensure that placement is suitable (within Canvas window and not overlapping or behind other elements)
     var suitablePlacement = false;
+    var selectedPosition;
     while (!suitablePlacement) {
-        var selectedPosition = GetRandomXY();
+        selectedPosition = GetRandomXY();
         if (selectedPosition["x"] >= width * 1.5 &&
             selectedPosition["x"] + (width * 1.5) <= canvas.width &&
             selectedPosition["y"] >= height * 1.5 &&
@@ -127,6 +151,15 @@ function DrawText(ctx, text) {
 
     // Add full positioning details to drawnObjects array
     drawnObjects.push({
+        "type": "text",
+        "db": {
+            "text": text,
+            "font": selectedFont,
+            "size": selectedSize,
+            "colour": selectedColour,
+            "x": selectedPosition["x"],
+            "y": selectedPosition["y"] 
+        },
         "x1": actualX1,
         "x2": actualX2,
         "y1": actualY1,
@@ -151,26 +184,33 @@ function DrawImage(ctx, text) {
 
         // Ensure that placement is suitable (within Canvas window and not overlapping or behind other elements)
         var suitablePlacement = false;
+        var selectedPosition;
         while (!suitablePlacement) {
-            var selectedPosition = GetRandomXY();
+            selectedPosition = GetRandomXY();
             if (selectedPosition["x"] + newWidth <= canvas.width && selectedPosition["y"] + newHeight <= canvas.height) {
                 if (!ObjectIntersection(selectedPosition["x"], selectedPosition["x"] + newWidth, selectedPosition["y"], selectedPosition["y"] + newHeight)){
                     suitablePlacement = true;
                     ctx.drawImage(imgObj, selectedPosition["x"], selectedPosition["y"], newWidth, newHeight);
                 }
             }
-        }
-
-        // Draw image to canvas
-        
+        }        
 
         // Add full positioning details to drawnObjects array
         drawnObjects.push({
+            "type": "image",
+            "db": {
+                "path": text,
+                "width": newWidth,
+                "height": newHeight,
+                "x": selectedPosition["x"],
+                "y": selectedPosition["y"] 
+            },
             "x1": selectedPosition["x"],
             "x2": selectedPosition["x"] + newWidth,
             "y1": selectedPosition["y"],
             "y2": selectedPosition["y"] + newHeight
         });
+        // console.log(JSON.stringify(drawnObjects));
     }
 }
 
