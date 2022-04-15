@@ -255,7 +255,7 @@ function AddInput(type) {
     var textInputs = document.querySelector('#text-inputs');
     var imageInputs = document.querySelector('#image-inputs');
 
-    var actualInputs = type=="text" ? textInputs.querySelectorAll('div') : imageInputs.querySelectorAll('div')
+    var actualInputs = type=="text" ? textInputs.querySelectorAll('div') : imageInputs.querySelectorAll('div');
 
     var lastInput;
     var lastInt;

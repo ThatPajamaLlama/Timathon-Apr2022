@@ -414,6 +414,56 @@ section#startnow form input[type='submit']:hover {
     background-color: #eee;
 }
 
+
+/* --------------- Dash --------------- */
+
+#dash #dash-container {
+    width: 100%;
+    text-align: center;
+}
+
+#dash main h1 {
+    font-size: 36pt;
+}
+
+#dash main h1, #dash main h2 {
+    padding: 10px;
+}
+
+#dash main h1 span {
+    color: #9C1FD6;
+}
+
+#dash #quote-image {
+    width: 60%;
+    height: 500px;
+    margin: 40px auto 10px auto;
+    background-size: cover;
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px black;
+}
+
+#dash #quote-container {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+#dash #quote {
+    font-size: 22pt;
+    color: white;
+    text-shadow: 0px 0px 3px black;
+    /* -webkit-text-stroke: 1px black; */
+    text-align: center;
+}
+
+#dash #quote-container #author {
+    padding-top: 20px;
+    font-size: 16pt;
+    font-style: italic;
+    text-shadow: 0px 0px 3px white;
+}
+
+
 /* --------------- Peer Support --------------- */
 
 #peer-support section#new-post form {
