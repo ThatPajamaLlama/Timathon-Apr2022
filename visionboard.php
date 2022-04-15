@@ -1,6 +1,17 @@
 <?php
 session_start();
 
+include "assets/inc/db_helper.php";
+$conn = db_connect();
+
+function get_name($conn) {
+    $sqlName = "SELECT name FROM vision_board WHERE id = ?";
+    $valuesName = [['i', $_GET['id']]];
+    $rsName = db_prep_stmt($conn, $sqlName, $valuesName);
+    $name = mysqli_fetch_assoc($rsName)['name'];
+    return $name;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -13,18 +24,20 @@ session_start();
 
             <div id="editor" class="flex-container">
                 <div id="options">
+                    <a id="back-button" href="visionboards.php"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>Back</a>
+                    <h1>Edit '<?php echo get_name($conn);?>'</h1>
                     <form onsubmit="DrawBoard(this, ctx); return false;">
                         <h2>Text</h2>
                         <div id="text-inputs">
-                            <input type="text" id="text-1" placeholder="Text"/>
+                            <!-- Filled in using JS -->
                         </div>
-                        <a onclick="AddInput('text');"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                        <a class="add-button" onclick="AddInput('text');"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
 
                         <h2>Imagery</h2>
                         <div id="image-inputs">
-                            <input type="text" id="image-1" placeholder="Image (Link)"/>
+                            <!-- Filled in using JS -->
                         </div>
-                        <a onclick="AddInput('image');"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                        <a class="add-button" onclick="AddInput('image');"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
 
                         <input type="submit" value="Draw"/>
                     </form>

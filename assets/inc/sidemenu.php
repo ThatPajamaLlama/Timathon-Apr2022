@@ -11,7 +11,7 @@
         </ul>
         <h2>Change Everyday</h2>
         <ul>
-            <li><a href="visionboard.php"><i class="fa fa-thumb-tack" aria-hidden="true"></i>Vision Board</a></li>
+            <li><a href="visionboards.php"><i class="fa fa-thumb-tack" aria-hidden="true"></i>Vision Board</a></li>
             <li><a href="bucketlist.php"><i class="fa fa-list" aria-hidden="true"></i>Bucket List</a></li>
         </ul>
         <h2>Peer Support</h2>
@@ -27,5 +27,10 @@
 
 <script>
     var currentPage = window.location.href.substr(window.location.href.lastIndexOf("/")+1);
+    if (currentPage.includes("visionboard")) {
+        currentPage = "visionboards.php";
+    }
+
     document.querySelector('nav a[href^="' + currentPage + '"]').classList.add('active');
+    
 </script>

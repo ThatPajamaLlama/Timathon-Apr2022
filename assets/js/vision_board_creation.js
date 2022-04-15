@@ -23,10 +23,8 @@ function LoadBoard(ctx) {
                     var counter = 0;
                     objects.forEach(function(text) {
                         counter = counter + 1;
-                        if (counter != 1){
-                            AddInput("text");
-                        }
-                        document.querySelector('#text-' + counter).value = text["text"];
+                        AddInput("text");
+                        document.querySelector('#text-' + counter + " input[type='text']").value = text["text"];
                         ctx.font = text["size"] + "px " + text["font"];
                         ctx.fillStyle = text["colour"];
                         ctx.fillText(text["text"], text["x"], text["y"]);
@@ -35,10 +33,8 @@ function LoadBoard(ctx) {
                     var counter = 0;
                     objects.forEach(function(image) {
                         counter = counter + 1;
-                        if (counter != 1){
-                            AddInput("image");
-                        }
-                        document.querySelector('#image-' + counter).value = image["path"];
+                        AddInput("image");
+                        document.querySelector('#image-' + counter + " input[type='text']").value = image["path"];
                         var imgObj = new Image();
                         imgObj.onload = function () {
                             ctx.drawImage(imgObj, image["x"], image["y"], image["width"], image["height"]);
@@ -259,23 +255,33 @@ function AddInput(type) {
     var textInputs = document.querySelector('#text-inputs');
     var imageInputs = document.querySelector('#image-inputs');
 
-    var actualInputs = type=="text" ? textInputs.querySelectorAll('input') : imageInputs.querySelectorAll('input')
-    var lastInput = actualInputs[actualInputs.length - 1];
-    var lastInt = parseInt(lastInput.id.split("-")[1]);
+    var actualInputs = type=="text" ? textInputs.querySelectorAll('div') : imageInputs.querySelectorAll('div')
+
+    var lastInput;
+    var lastInt;
+    if (actualInputs.length > 0) {
+        lastInput = actualInputs[actualInputs.length - 1];
+        lastInt = parseInt(lastInput.id.split("-")[1]);
+    } else {
+        lastInt = 0;
+    }
 
     if (type == "text") {
-        var newText = document.createElement('input');
-        newText.type = "text";
+        var newText = document.createElement('div');
         newText.id = "text-" + (lastInt + 1);
-        newText.placeholder = "Text";
+        newText.innerHTML += "<input type='text' placeholder='Text'/>";
+        newText.innerHTML += "<button class='remove-button' type='button' onclick='return RemoveInput(this);'><i class='fa fa-minus-circle' aria-hidden='true'></i></button>";
         textInputs.appendChild(newText);
     } else {
-        var newImage = document.createElement('input');
-        newImage.type = "text";
+        var newImage = document.createElement('div');
         newImage.id = "image-" + (lastInt + 1);
-        newImage.placeholder = "Image (Link)";
+        newImage.innerHTML += "<input type='text' placeholder='Image (Link)'/>";
+        newImage.innerHTML += "<button class='remove-button' type='button' onclick='return RemoveInput(this);'><i class='fa fa-minus-circle' aria-hidden='true'></i></button>";
         imageInputs.appendChild(newImage);
     }
-    
+}
 
+function RemoveInput(button) {
+    var input = button.parentNode;
+    input.remove();
 }
