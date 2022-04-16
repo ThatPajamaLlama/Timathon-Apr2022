@@ -1,8 +1,28 @@
 <?php
 session_start();
+include "assets/inc/user_access_control.php";
 
 include "assets/inc/db_helper.php";
 $conn = db_connect();
+
+
+
+function check_access($conn) {
+    $sqlUser = "SELECT user_id FROM vision_board WHERE id = ?";
+    $valuesUser = [['i', $_GET['id']]];
+    $rsUser = db_prep_stmt($conn, $sqlUser, $valuesUser);
+    $user = mysqli_fetch_assoc($rsUser)["user_id"];
+    if ($user != $_SESSION['username']) {
+        $_SESSION['toast'] = [
+            "type" => "error",
+            "header" => "Not Your Vision Board",
+            "message" => "Select one of your own to view/edit"
+        ];
+        header('location: visionboards.php');
+    }
+}
+
+check_access($conn);
 
 function get_name($conn) {
     $sqlName = "SELECT name FROM vision_board WHERE id = ?";

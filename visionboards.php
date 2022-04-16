@@ -1,5 +1,8 @@
 <?php
 session_start();
+include "assets/inc/user_access_control.php";
+
+include "assets/inc/toast_helper.php";
 
 ?>
 
@@ -33,6 +36,7 @@ session_start();
 </html>
 
 <script src="assets/js/tata.js"></script>
+<?php handle_toast();?>
 
 <script>
     function AddBoard(e, form) {

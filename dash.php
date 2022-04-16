@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include "assets/inc/user_access_control.php";
 include "assets/inc/toast_helper.php";
 
 function get_image() {

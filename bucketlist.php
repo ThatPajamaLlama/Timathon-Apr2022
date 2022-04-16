@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+include "assets/inc/user_access_control.php";
 ?>
 
 <!DOCTYPE html>
