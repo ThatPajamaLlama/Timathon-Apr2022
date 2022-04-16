@@ -468,7 +468,7 @@ section#startnow form input[type='submit']:hover {
 
 #peer-support section#new-post form {
     background-color: #ddd;
-    margin: 20px 80px;
+    /* margin: 20px 80px; */
     padding: 10px;
     border-radius: 5px;
 }
@@ -479,7 +479,7 @@ section#startnow form input[type='submit']:hover {
 }
 
 #peer-support section#new-post form textarea {
-    width: 90%;
+    width: 85%;
     font-family: LouisGeorge;
     padding: 10px;
     font-size: 12pt;
@@ -487,12 +487,12 @@ section#startnow form input[type='submit']:hover {
 }
 
 #peer-support section#new-post form button {
-    width: 10%;
+    width: 15%;
     background-color: #9C1FD6;
     border: 0;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
+    /* font-weight: bold; */
     color: #eee;
     font-size: 16pt;
     padding: 10px;
@@ -505,7 +505,7 @@ section#startnow form input[type='submit']:hover {
 
 #peer-support .post {
     background-color: #ddd;
-    margin: 20px 80px;
+    margin: 20px 0;
     padding: 15px;
     border-radius: 5px;
 }
@@ -589,7 +589,26 @@ section#startnow form input[type='submit']:hover {
     padding: 3px 0;
 }
 
+#peer-support main > .flex-container {
+    width: 100%;
+}
 
+#peer-support main > .flex-container > div {
+    padding: 80px;
+}
+
+#peer-support #info {
+    width: 45%;
+}
+
+#peer-support #social {
+    width: 55%;
+}
+
+#peer-support #info h1 {
+    border-bottom: 2px solid #9C1FD6;
+    padding-bottom: 5px;
+}
 
 
 table.likes {
@@ -969,20 +988,6 @@ table.likes {
     width: 50%;
 }
 
-#bucket-list #info h1 {
-    border-bottom: 2px solid #9C1FD6;
-    padding-bottom: 5px;
-}
-
-#bucket-list #info h1:last-of-type{
-    padding-top: 20px;
-}
-
-#bucket-list #info p {
-    padding: 10px 0;
-    font-size: 13pt;
-}
-
 #bucket-list #info #chart {
     width: 70%;
     margin: 10px auto;
@@ -1088,7 +1093,17 @@ table.likes {
     font-size: 13pt;
 }
 
-#vision-boards #info #chart {
-    width: 70%;
-    margin: 10px auto;
+.user-area main #info h1 {
+    border-bottom: 2px solid #9C1FD6;
+    padding-bottom: 5px;
+    font-size: 18pt;
+}
+
+#bucket-list #info h1:last-of-type{
+    padding-top: 20px;
+}
+
+.user-area main #info p {
+    padding: 10px 0;
+    font-size: 13pt;
 }
