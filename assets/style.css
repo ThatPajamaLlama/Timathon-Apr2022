@@ -1107,3 +1107,161 @@ table.likes {
     padding: 10px 0;
     font-size: 13pt;
 }
+
+
+/* ------------------------------ Mobile Layouts ------------------------------ */
+
+@media all and (max-width: 960px) {
+
+    /* Global */
+    .flex-container {
+        flex-wrap: wrap;
+    }
+
+    .user-area header {
+        width: 100%;
+    }
+
+    .user-area main {
+        width: 100%;
+    }
+
+    .user-area #info {
+        width: 100% !important;
+        order: 1;
+    }
+
+    /* Default */
+
+    #default header {
+        position: relative;
+        background-color: #111;
+        top: auto;
+        z-index: auto;
+        width: auto;
+    }
+
+    #default .navbar ul li:not(.action-button) {
+        padding: 0.2rem 0.5rem;
+    }
+
+    #default .navbar .action-button a {
+        padding: 0.2rem 0.5rem;
+    }
+
+    #default section {
+        scroll-snap-align:unset;
+        height: auto;
+    }
+
+    #default section {
+        padding: 60px 0;
+    }
+
+    #default section#home h1 {
+        font-size: 38pt;
+    }
+
+    #default section#about .flex-container {
+        width: 90%;
+    }
+
+    #default section#about .flex-container > div {
+        width: 100%;
+    }
+
+    #default section#features #feature-board {
+        width: 90%;
+    }
+
+    #default section#features #feature-board > div {
+        width: 100%;
+    }
+
+    #default section#features #feature-board > div:active p {
+        animation-name: appear;
+        animation-duration: .7s;
+        opacity: 1;
+    }
+
+    #default section#features #feature-board > div p {
+        margin-bottom: 20px;
+    }
+
+    #default section#startnow form {
+        width: 90%;
+    }
+
+    /* Dash */
+
+    #dash main h1 {
+        font-size: 24pt;
+        padding-top: 40px;
+    }
+
+    #dash #quote-image {
+        width: 80%;
+    }
+
+
+    /* Vision boards and bucket lists */
+
+    #vision-boards #editor, #bucket-list #editor {
+        width: 100%;
+        order: 2;
+    }
+
+    #vision-boards section, #bucket-list section {
+        padding: 30px;
+    }
+
+    #vision-boards #editor form input, #bucket-list #editor form input {
+        width: 85%;
+    }
+
+    #vision-boards #editor form button, #bucket-list #editor form button {
+        margin: 0 10px;
+    }
+
+    /* Vision board */
+
+    #vision-board #editor {
+        height: auto;
+    }
+
+    #vision-board #options { 
+        width: 100%;
+        height: max-content;
+        overflow-y: auto;
+        max-height: max-content;
+    }
+
+    #vision-board #board {
+        width: 100%;
+    }
+
+    /* Peer support */
+
+    #peer-support main > .flex-container > div {
+        padding: 30px;
+    }
+
+    #peer-support #social {
+        width: 100%;
+        order: 2;
+    }
+
+    #peer-support #info {
+        width: 100%;
+        order: 1;
+    }
+
+    #peer-support section#new-post form textarea {
+        width: 80%;
+    }
+
+    #peer-support section#new-post form button {
+        font-size: 12pt;
+    }
+
+}
