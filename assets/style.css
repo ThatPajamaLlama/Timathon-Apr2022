@@ -843,7 +843,7 @@ table.likes {
     transition-duration: .3s;
 }
 
-#vision-board #options form input[type='submit'] {
+#vision-board #options form input[type='submit'], #vision-board #draw-buttons #spinner {
     width: 70%;
     display: table;
     margin: 0 auto;
@@ -853,10 +853,19 @@ table.likes {
     border-radius: 100px;
     font-family: LouisGeorge;
     font-size: 14pt;
-    background-color: #9C1FD6;
     color: white;
     border: 2px solid white;
     transition-duration: .3s;
+}
+
+#vision-board #options form input[type='submit'] {
+    background-color: #9C1FD6;
+}
+
+#vision-board #draw-buttons #spinner {
+    background-color: #333;
+    text-align: center;
+    display: none;
 }
 
 #vision-board #options form input[type='submit']:hover {
@@ -882,6 +891,10 @@ table.likes {
     margin: 1cm auto;
     width: 90%;
 
+}
+
+#vision-board #draw-button i {
+    font-size: 18pt;
 }
 
 /* --------------- Bucket List --------------- */

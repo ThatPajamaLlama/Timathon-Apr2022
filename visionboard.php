@@ -59,7 +59,10 @@ function get_name($conn) {
                         </div>
                         <a class="add-button" onclick="AddInput('image');"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
 
-                        <input type="submit" value="Draw"/>
+                        <div id="draw-buttons">
+                            <input type="submit" value="Draw"/>
+                            <div id="spinner"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>
+                        </div>
                     </form>
                     
                 </div>

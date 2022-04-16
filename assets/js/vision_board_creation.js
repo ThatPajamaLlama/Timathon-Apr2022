@@ -5,6 +5,9 @@ const colours = ["#63ADF2", "#D52941", "#990D35", "#2D3047", "#FF9B71", "#1B998B
 const canvas = document.querySelector('#board canvas');
 const widths = [200, 250, 300, 350];
 
+const drawButton = document.querySelector("#draw-buttons input[type='submit']");
+const drawLoading = document.querySelector("#draw-buttons #spinner");
+
 // Array of drawn objects on canvas
 var drawnObjects = [];
 const boardId = new URLSearchParams(window.location.search).get('id');
@@ -14,6 +17,8 @@ window.onload = function() {
 }
 
 function LoadBoard(ctx) {
+    drawButton.style.display = "None";
+    drawLoading.style.display = "Block";
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -49,6 +54,9 @@ function LoadBoard(ctx) {
     request.open("POST", link, true);
     request.send();
 
+    drawLoading.style.display = "None";
+    drawButton.style.display = "Block";
+
 }
 
 
@@ -61,6 +69,9 @@ function LoadBoard(ctx) {
  * @param ctx - context for drawing to canvas
  */
 async function DrawBoard(form, ctx) {
+    drawButton.style.display = "None";
+    drawLoading.style.display = "Block";
+
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawnObjects = [];
@@ -73,11 +84,16 @@ async function DrawBoard(form, ctx) {
     }
 
     // Draw text
+    while (drawnObjects.length != images.length){
+        await new Promise(r => setTimeout(r, 1000));
+    }
     var textInputs = document.querySelector('#text-inputs');
     var texts = textInputs.querySelectorAll("input");
     for (text of texts) {
         DrawText(ctx, text.value);
     }
+
+    
 
     var ready = false;
     while (!ready) {
@@ -99,8 +115,14 @@ async function DrawBoard(form, ctx) {
             //  }
             request.open("POST", "assets/proc/save_vision_board_process.php?id=" + boardId, true);
             request.send(data);
+        } else {
+            console.log(drawnObjects.length + " and " + document.querySelectorAll("form input[type='text']").length);
         }
     }
+
+    drawLoading.style.display = "None";
+    drawButton.style.display = "Block";
+    
 
     
 }
@@ -111,22 +133,22 @@ async function DrawBoard(form, ctx) {
  * @param text - the text to be drawn
  */
 function DrawText(ctx, text) {
-    // Randomise properties of the text object
-    var selectedSize = GetRandomProperty(sizes);
-    var selectedFont = GetRandomProperty(fonts);
-    var selectedColour = GetRandomProperty(colours);
-    ctx.font = selectedSize + "px " + selectedFont;
-    ctx.fillStyle = selectedColour;
-
-    // Get width and height for positioning purposes
-    var sizing = ctx.measureText(text);
-    var width = sizing.width;
-    var height = sizing.actualBoundingBoxAscent + sizing.actualBoundingBoxDescent;
-
     // Ensure that placement is suitable (within Canvas window and not overlapping or behind other elements)
     var suitablePlacement = false;
     var selectedPosition;
     while (!suitablePlacement) {
+        // Randomise properties of the text object
+        var selectedSize = GetRandomProperty(sizes);
+        var selectedFont = GetRandomProperty(fonts);
+        var selectedColour = GetRandomProperty(colours);
+        ctx.font = selectedSize + "px " + selectedFont;
+        ctx.fillStyle = selectedColour;
+
+        // Get width and height for positioning purposes
+        var sizing = ctx.measureText(text);
+        var width = sizing.width;
+        var height = sizing.actualBoundingBoxAscent + sizing.actualBoundingBoxDescent;
+
         selectedPosition = GetRandomXY();
         if (selectedPosition["x"] >= width * 1.5 &&
             selectedPosition["x"] + (width * 1.5) <= canvas.width &&
@@ -173,15 +195,15 @@ function DrawImage(ctx, text) {
     imgObj.src = text;
 
     imgObj.onload = function() {
-        // Set size
-        var newWidth = GetRandomProperty(widths);
-        var ratio = imgObj.width / newWidth;
-        var newHeight = imgObj.height / ratio;
-
         // Ensure that placement is suitable (within Canvas window and not overlapping or behind other elements)
         var suitablePlacement = false;
         var selectedPosition;
         while (!suitablePlacement) {
+            // Set size
+            var newWidth = GetRandomProperty(widths);
+            var ratio = imgObj.width / newWidth;
+            var newHeight = imgObj.height / ratio;
+
             selectedPosition = GetRandomXY();
             if (selectedPosition["x"] + newWidth <= canvas.width && selectedPosition["y"] + newHeight <= canvas.height) {
                 if (!ObjectIntersection(selectedPosition["x"], selectedPosition["x"] + newWidth, selectedPosition["y"], selectedPosition["y"] + newHeight)){
@@ -206,7 +228,6 @@ function DrawImage(ctx, text) {
             "y1": selectedPosition["y"],
             "y2": selectedPosition["y"] + newHeight
         });
-        // console.log(JSON.stringify(drawnObjects));
     }
 }
 
