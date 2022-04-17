@@ -80,6 +80,16 @@ The 'Share with Others!' area enables people to do just that; they can view post
 
 ## Project Recreation
 
+The project can be seen [here](https://shannonnorris.co.uk/).
+
+If you'd like to set it up yourself, please follow these steps:
+1. Download/launch XAMPP
+2. Start the Apache and MySQL modules
+3. Download the project from this repo and save it in the XAMPP/htdocs directory
+4. On PHPMyAdmin, create a new database called 'Timathon' and import the database file included in this repo: 'timathon.sql'
+5. Navigate to localhost to view the website
+
+If you experience any issues with the database or have a login for PHPMyAdmin, then ensure the details in the db.ini file are accurate.
 
 ## Credit
 
