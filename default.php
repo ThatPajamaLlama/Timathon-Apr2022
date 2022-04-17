@@ -85,9 +85,9 @@ include "assets/inc/toast_helper.php";
                         <div id="login" class="active"><a onclick="ChangeTab('login');">Login</a></div>
                         <div id="signup"><a onclick="ChangeTab('signup');">Signup</a></div>
                     </div>
-                    <input type="text" name="username" id="username" placeholder="Username" required maxlength="25"/>
-                    <input type="password" name="password" id="password" placeholder="Password" required maxlength="50"/>
-                    <input type="password" name="password-confirmation" id="password-confirmation" placeholder="Confirm Password" maxlength="50"/>
+                    <input type="text" name="username" id="username" placeholder="Username" oninput="LengthValidation(this);" required maxlength="25"/>
+                    <input type="password" name="password" id="password" placeholder="Password" oninput="LengthValidation(this);" required maxlength="50"/>
+                    <input type="password" name="password-confirmation" id="password-confirmation" placeholder="Confirm Password" oninput="LengthValidation(this);" maxlength="50"/>
                     <input type="submit" value="Go"/>
                 </form>
             </section>
@@ -100,6 +100,7 @@ include "assets/inc/toast_helper.php";
 <script src="assets/js/tata.js"></script>
 <?php handle_toast(); ?>
 
+<script src="assets/js/input_validation.js"></script>
 
 <script type="text/javascript">
     const form = document.querySelector('section#startnow form');

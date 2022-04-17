@@ -56,12 +56,7 @@ function LoadBoard(ctx) {
 
     drawLoading.style.display = "None";
     drawButton.style.display = "Block";
-
 }
-
-
-
-
 
 /*
  * Draws the vision board in its entirety
@@ -76,25 +71,40 @@ async function DrawBoard(form, ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawnObjects = [];
 
-    // Draw images
+    // Draw images, first removing any empty image inputs
     var imageInputs = document.querySelector('#image-inputs');
     var images = imageInputs.querySelectorAll("input");
+    var i = images.length;
+    while (i--) {
+        if (images[i].value == ""){
+            images[i].parentNode.remove();
+        }
+    }
+    images = imageInputs.querySelectorAll("input");
     for (image of images) {
         DrawImage(ctx, image.value);
     }
 
-    // Draw text
+    // Wait for all images to be drawn
     while (drawnObjects.length != images.length){
         await new Promise(r => setTimeout(r, 1000));
     }
+
+    // Draw text, first removing any empty text inputs
     var textInputs = document.querySelector('#text-inputs');
     var texts = textInputs.querySelectorAll("input");
+    var i = texts.length;
+    while (i--) {
+        if (texts[i].value == ""){
+            texts[i].parentNode.remove();
+        }
+    }
+    texts = textInputs.querySelectorAll("input");
     for (text of texts) {
         DrawText(ctx, text.value);
     }
 
-    
-
+    // Save the vision board changes
     var ready = false;
     while (!ready) {
         await new Promise(r => setTimeout(r, 1000));
@@ -110,21 +120,13 @@ async function DrawBoard(form, ctx) {
             };
             var data = new FormData();
             data.append("data", JSON.stringify(drawnObjects));
-            // for (var value of data.values()) {
-            //     console.log(value);
-            //  }
             request.open("POST", "assets/proc/save_vision_board_process.php?id=" + boardId, true);
             request.send(data);
-        } else {
-            console.log(drawnObjects.length + " and " + document.querySelectorAll("form input[type='text']").length);
         }
     }
 
     drawLoading.style.display = "None";
-    drawButton.style.display = "Block";
-    
-
-    
+    drawButton.style.display = "Block";    
 }
 
 /*
@@ -290,13 +292,13 @@ function AddInput(type) {
     if (type == "text") {
         var newText = document.createElement('div');
         newText.id = "text-" + (lastInt + 1);
-        newText.innerHTML += "<input type='text' placeholder='Text'/>";
+        newText.innerHTML += "<input type='text' placeholder='Text' maxLength='25' oninput='LengthValidation(this);'/>";
         newText.innerHTML += "<button class='remove-button' type='button' onclick='return RemoveInput(this);'><i class='fa fa-minus-circle' aria-hidden='true'></i></button>";
         textInputs.appendChild(newText);
     } else {
         var newImage = document.createElement('div');
         newImage.id = "image-" + (lastInt + 1);
-        newImage.innerHTML += "<input type='text' placeholder='Image (Link)'/>";
+        newImage.innerHTML += "<input type='text' placeholder='Image (Link)'  maxLength='255' oninput='LengthValidation(this);'/>";
         newImage.innerHTML += "<button class='remove-button' type='button' onclick='return RemoveInput(this);'><i class='fa fa-minus-circle' aria-hidden='true'></i></button>";
         imageInputs.appendChild(newImage);
     }

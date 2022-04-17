@@ -15,7 +15,7 @@ include "assets/inc/user_access_control.php";
                     <section id="new-post">
                         <form onsubmit="return CreatePost(event, this);" method="post">
                             <div class="flex-container">
-                                <textarea id="post" name="post" placeholder="How did you make today a little less ordinary?"></textarea>
+                                <textarea id="post" name="post" placeholder="How did you make today a little less ordinary?" onkeyup="PostChange(event, this);" maxLength="255"></textarea>
                                 <button type="submit"><i class="fa fa-share-square-o" aria-hidden="true"></i>Share</button>
                             </div>
                         </form>
@@ -62,7 +62,20 @@ include "assets/inc/user_access_control.php";
             };
             request.open("POST", "assets/proc/create_post_process.php", true);
             request.send(new FormData(form));
-        }       
+        } else {
+            tata.error('Cannot Create Post', 'Contents of post must not be blank.', {
+                position: 'br'
+            });
+        }  
+    }
+
+    function PostChange(event, input) {
+        var max = input.maxLength;
+        if (input.value.length >= max) {
+            tata.warn('Max Characters Reached', 'Post must not exceed ' + max + ' characters.', {
+                position: 'br'
+            });
+        }
     }
 
     function PostLike(link) {
@@ -84,24 +97,37 @@ include "assets/inc/user_access_control.php";
 
     function CreateComment(e, input) {
         if (e.key == "Enter"){
-            var postId = input.parentNode.parentNode.id.split("-")[1];
+            input.value = "";
+            text = input.value.replace(/(\r\n|\n|\r)/gm, "");
+            if (text == "") {
+                tata.error('Cannot Create Comment', 'Contents of comment must not be blank.', {
+                    position: 'br'
+                });
+            } else {
+                var postId = input.parentNode.parentNode.id.split("-")[1];
 
-            var request = new XMLHttpRequest();
-            request.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    input.value = "";
-                    UpdatePosts();
-                    tata.success('Posted Comment', 'Wahoo - supporting others!', {
-                        position: 'br'
-                    });
-                }
-            };
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        
+                        UpdatePosts();
+                        tata.success('Posted Comment', 'Wahoo - supporting others!', {
+                            position: 'br'
+                        });
+                    }
+                };
 
-            var data = new FormData();
-            data.append("postId", postId);
-            data.append("comment", input.value);
-            request.open("POST", "assets/proc/create_comment_process.php", true);
-            request.send(data);
+                var data = new FormData();
+                data.append("postId", postId);
+                data.append("comment", input.value);
+                request.open("POST", "assets/proc/create_comment_process.php", true);
+                request.send(data);
+            }
+            
+        } else if (input.value.length >= input.maxLength) {
+            tata.warn('Max Characters Reached', 'Comment must not exceed ' + input.maxLength + ' characters.', {
+                position: 'br'
+            });
         }
     }
 
@@ -132,7 +158,7 @@ include "assets/inc/user_access_control.php";
                     html +=    "</div>";
                     html +=    "</div>";
                     html +=    "<div class='comments'>";
-                    html +=    "<textarea name='comment' rows='1' placeholder='Write a comment...' onkeyup='return CreateComment(event, this);'></textarea>";
+                    html +=    "<textarea name='comment' rows='1' placeholder='Write a comment...' onkeyup='CreateComment(event, this);' maxLength='255'></textarea>";
                     for (const [commentId, comment] of Object.entries(details['comments'])) {
                         html +=    "<div id='comment-" + commentId.replaceAll("'", "") + "' class='comment'>";
                         html +=        "<h1 class='user'>" + comment['username'] + "</h1>";

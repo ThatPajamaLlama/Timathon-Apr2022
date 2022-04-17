@@ -80,4 +80,5 @@ function get_name($conn) {
 <script src="assets/js/tata.js"></script>
 <script src="assets/js/canvas_setup.js"></script>
 
+<script src="assets/js/input_validation.js"></script>
 <script src="assets/js/vision_board_creation.js"></script>

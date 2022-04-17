@@ -14,7 +14,7 @@ include "assets/inc/user_access_control.php";
             <div class="flex-container">
                 <section id="editor">
                     <form class="flex-container" onsubmit="return AddItem(event, this);">
-                        <input type="text" id="item" name="item" placeholder="Enter a new bucket list item..." onkeyup="if (event.key == 'enter') {this.parentNode.submit();}"/>
+                        <input type="text" id="item" name="item" placeholder="Enter a new bucket list item..." onkeyup="ItemChange(event, this)" maxLength="50"/>
                         <button type="submit"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
                     </form>
                     <table id="list">
@@ -159,6 +159,16 @@ include "assets/inc/user_access_control.php";
         request.send();    
     }
 
+    function ItemChange(event, input) {
+        if (event.key == 'enter') {
+            input.parentNode.submit();            
+        } else if (input.value.length >= input.maxLength) {
+            tata.warn('Max Characters Reached', 'Bucket list item must not exceed ' + input.maxLength + ' characters.', {
+                position: 'br'
+            });
+        }
+    }
+
     function AddItem(e, form) {
         e.preventDefault();
         if (form.querySelector('#item').value != ""){
@@ -174,7 +184,11 @@ include "assets/inc/user_access_control.php";
             };
             request.open("POST", "assets/proc/add_bucket_list_item_process.php", true);
             request.send(new FormData(form));
-        }       
+        } else {
+            tata.error('Cannot Add Item', 'Item must not be left blank.', {
+                position: 'br'
+            });
+        }  
 
     }
 

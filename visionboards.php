@@ -16,7 +16,7 @@ include "assets/inc/toast_helper.php";
             <div class="flex-container">
                 <section id="editor">
                     <form class="flex-container" onsubmit="return AddBoard(event, this);">
-                        <input type="text" id="board-name" name="board-name" placeholder="Enter a name for your vision board..." onkeyup="if (event.key == 'enter') {this.parentNode.submit();}"/>
+                        <input type="text" id="board-name" name="board-name" placeholder="Enter a name for your vision board..." maxLength="50" onkeyup="NameChange(event, this);"/>
                         <button type="submit"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
                     </form>
                     <table id="list">
@@ -39,10 +39,20 @@ include "assets/inc/toast_helper.php";
 <?php handle_toast();?>
 
 <script>
+    function NameChange(event, input) {
+        if (event.key == 'enter') {
+            input.parentNode.submit();
+        } else if (input.value.length >= input.maxLength) {
+            tata.warn('Max Characters Reached', 'Board name must not exceed ' + input.maxLength + ' characters.', {
+                position: 'br'
+            });
+        }
+    }
+
     function AddBoard(e, form) {
         e.preventDefault();
         var name = form.querySelector('#board-name');
-        if (name.value != ""){
+        if (name.value != "" && name.value.length <= name.maxLength){
             var request = new XMLHttpRequest();
             request.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -55,7 +65,15 @@ include "assets/inc/toast_helper.php";
             };
             request.open("POST", "assets/proc/add_vision_board_process.php", true);
             request.send(new FormData(form));
-        }       
+        } else if (name.value == "") {
+            tata.error('Cannot Create Visionboard', 'Visionboard requires a name.', {
+                position: 'br'
+            });
+        } else {
+            tata.error('Cannot Create Visionboard', 'Visionboard name must not exceed ' + name.maxLength + ' characters.', {
+                position: 'br'
+            });
+        }
     }
 
     window.onload = function() {
