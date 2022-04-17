@@ -96,11 +96,9 @@ function CreateComment(e, input) {
             });
         } else {
             var postId = input.parentNode.parentNode.id.split("-")[1];
-
             var request = new XMLHttpRequest();
             request.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    
                     UpdatePosts();
                     tata.success('Posted Comment', 'Wahoo - supporting others!', {
                         position: 'br'
@@ -137,36 +135,12 @@ function DisplayPosts() {
             html = "";
             for (const [id, details] of Object.entries(response)) {
                 html += "<article id='post-" + id.replaceAll("'", "") + "' class='post'>";
-                html +=    "<h1 class='user'>" + details['username'] + "</h1>";
-                html +=    "<div class='timestamp'>";
-                html +=         "<h2><span class='timeago'>" + details['timeago'] + "</span> &#183; <i class='fa fa-clock-o' aria-hidden='true'></i></h2>";
-                html +=         "<span class='timestamp-tooltip'>" + details['timestamp'] + "</span>";
-                html +=    "</div>";
-                html +=    "<div class='text'>";
-                details['text'].forEach(function(paragraph) {
-                    html +=    "<p>" + paragraph + "</p>";
-                });
-                if (details['imageext'] != null) {
-                    html += "<img src='assets/img/social/" + id.replaceAll("'", "") + "." + details['imageext'] + "'/>"
-                }
-                html += "<table class='likes" + (details['userliked'] == 1 ? " active" : "") + "'>";
-                html += "<tr>";
-                html += "<td><a onclick='return PostLike(this);'><i class='fa fa-thumbs-up' aria-hidden='true'></i></a></td>";
-                html += "<td><span>" + details['likes'] + "</span></td>";
-                html += "</tr>";
-                html += "</table>";
-                html +=    "</div>";
-                html +=    "</div>";
+                html += HTMLPostBody(id, details);
                 html +=    "<div class='comments'>";
                 html +=    "<textarea name='comment' rows='1' placeholder='Write a comment...' onkeyup='CreateComment(event, this);' maxLength='255'></textarea>";
                 for (const [commentId, comment] of Object.entries(details['comments'])) {
                     html +=    "<div id='comment-" + commentId.replaceAll("'", "") + "' class='comment'>";
-                    html +=        "<h1 class='user'>" + comment['username'] + "</h1>";
-                    html +=        "<div class='timestamp'>";
-                    html +=            "<h2><span class='timeago'>" + comment['timeago'] + "</span> · <i class='fa fa-clock-o' aria-hidden='true'></i></h2>";
-                    html +=            "<span class='timestamp-tooltip'>" + comment['timestamp'] + "</span>";
-                    html +=        "</div>";
-                    html +=        "<p>" + comment['text'] + "</p>";
+                    html += HTMLCommentBody(commentId, comment);
                     html +=    "</div>";
                 }  
                 html +=    "</div>";
@@ -240,12 +214,7 @@ function ChangeComments(postId, comments, oldComments) {
             var newComment = document.createElement("div");
             newComment.setAttribute("id", "comment-" + id.replaceAll("'", ""));
             newComment.setAttribute("class", "comment");
-            html =        "<h1 class='user'>" + details['username'] + "</h1>";
-            html +=        "<div class='timestamp'>";
-            html +=            "<h2><span class='timeago'>" + details['timeago'] + "</span> · <i class='fa fa-clock-o' aria-hidden='true'></i></h2>";
-            html +=            "<span class='timestamp-tooltip'>" + details['timestamp'] + "</span>";
-            html +=        "</div>";
-            html +=        "<p>" + details['text'] + "</p>";
+            var html = HTMLCommentBody(id, details);
             newComment.innerHTML = html;
             commentSection.appendChild(newComment);
         } else if (details['timeago'] != oldComments[id]['timeago']) {
@@ -284,25 +253,7 @@ function ShowNewPost(id, details) {
     newPost.setAttribute("id", "post-" + id.replaceAll("'", ""));
     newPost.setAttribute("class", "post");
     html = ""
-    html +=    "<h1 class='user'>" + details['username'] + "</h1>";
-    html +=    "<div class='timestamp'>";
-    html +=         "<h2><span class='timeago'>" + details['timeago'] + "</span> &#183; <i class='fa fa-clock-o' aria-hidden='true'></i></h2>";
-    html +=         "<span class='timestamp-tooltip'>" + details['timestamp'] + "</span>";
-    html +=    "</div>";
-    html +=    "<div class='text'>";
-    details['text'].forEach(function(paragraph) {
-        html +=    "<p>" + paragraph + "</p>";
-    });
-    if (details['imageext'] != null) {
-        html += "<img src='assets/img/social/" + id.replaceAll("'", "") + "." + details['imageext'] + "'/>"
-    }     
-    html +=    "</div>";
-    html += "<table class='likes" + (details['userliked'] == 1 ? " active" : "") + "'>";
-    html += "<tr>";
-    html += "<td><a onclick='return PostLike(this);'><i class='fa fa-thumbs-up' aria-hidden='true'></i></a></td>";
-    html += "<td><span>" + details['likes'] + "</span></td>";
-    html += "</tr>";
-    html += "</table>";
+    html += HTMLPostBody(id, details);
     html +=    "<div class='comments'>";
     html +=    "<textarea name='comment' rows='1' placeholder='Write a comment...'></textarea>";
     html +=    "</div>";
@@ -344,4 +295,48 @@ function AddFileUpload(button) {
 function RemoveFileUpload(button) {
     button.parentNode.innerHTML = "";
     addButton.style.display = 'flex';
+}
+
+/*
+* Creates all the HTML required to show a post
+* @param id - the ID of the post
+* @param details - array containing details of the post e.g. username, text, image etc.
+*/
+function HTMLPostBody(id, details) {
+    var html = "";
+    html +=    "<h1 class='user'>" + details['username'] + "</h1>";
+    html +=    "<div class='timestamp'>";
+    html +=         "<h2><span class='timeago'>" + details['timeago'] + "</span> &#183; <i class='fa fa-clock-o' aria-hidden='true'></i></h2>";
+    html +=         "<span class='timestamp-tooltip'>" + details['timestamp'] + "</span>";
+    html +=    "</div>";
+    html +=    "<div class='text'>";
+    details['text'].forEach(function(paragraph) {
+        html +=    "<p>" + paragraph + "</p>";
+    });
+    if (details['imageext'] != null) {
+        html += "<img src='assets/img/social/" + id.replaceAll("'", "") + "." + details['imageext'] + "'/>"
+    }
+    html += "</div>";
+    html += "<table class='likes" + (details['userliked'] == 1 ? " active" : "") + "'>";
+    html += "<tr>";
+    html += "<td><a onclick='return PostLike(this);'><i class='fa fa-thumbs-up' aria-hidden='true'></i></a></td>";
+    html += "<td><span>" + details['likes'] + "</span></td>";
+    html += "</tr>";
+    html += "</table>";
+    return html;
+}
+
+/*
+* Creates all the HTML required to show a comment
+* @param id - the ID of the comment
+* @param details - array containing details of the comment e.g. username, text, timestamp etc.
+*/
+function HTMLCommentBody(id, details) {
+    html =        "<h1 class='user'>" + details['username'] + "</h1>";
+    html +=        "<div class='timestamp'>";
+    html +=            "<h2><span class='timeago'>" + details['timeago'] + "</span> · <i class='fa fa-clock-o' aria-hidden='true'></i></h2>";
+    html +=            "<span class='timestamp-tooltip'>" + details['timestamp'] + "</span>";
+    html +=        "</div>";
+    html +=        "<p>" + details['text'] + "</p>";
+    return html;
 }
