@@ -26,18 +26,46 @@ The languages/technologies used in the development of this entry include:
 
 ![Homepage](https://i.imgur.com/IhLFi2C.gif)
 
+The homepage captures the goals of 'To the Fullest', with an about section explaining the mantra of the website and the features that exist to assist its users.
+
+**Dashboard**
+
+![Dashboard](https://i.imgur.com/RGq2E6a.gif)
+
+This is the landing area once users signup or login. It greets them to the website and displays a randomly selected inspirational quote in front of an also random but equally inspiring landscape.
+
 **Style Generator**
 
 ![Style Generator](https://i.imgur.com/MaCFwul.gif)
+
+The style generator is one of the most basic features of the application. Nevertheless, it has significant potential to make the day a little less ordinary, by randomly selecting a style for the user to wear.
 
 **Activity Randomiser**
 
 ![Activity Randomiser](https://i.imgur.com/AV9Qi40.gif)
 
-**Vision Board**
+With similar function to the style generator, the activity randomiser selects an activity randomly from an assortment of options.
+
+**Vision Boards**
+
+![Vision Boards](https://i.imgur.com/gVnXhu7.gif)
+
+This feature is arguably one of the most complex in the application, and has potential to encourage people to change their daily habits and thus make everyday a little less ordinary.
+
+Users can create multiple vision boards to express their personal goals visually as a method of staying inspired and motivated. This involves adding text and images which are displayed on a canvas.
 
 **Bucket List**
 
+![Bucket List](https://i.imgur.com/7zFNgqe.gif)
+
+Users are able to create a bucket list of experiences/achievements they wish to achieve within their lifetime. Not only can they amend this to their hearts content, but they can also feel rewarded for their progress as a result of the progress section on hte right-hand side; this consists of a pie chart as well as encouraging words relating to their progress individually.
+
 **Sharing Platform**
+
+![Share with Others](https://i.imgur.com/2Cosopo.gif)
+
+When attempting to do anything that requires a level of motivation, it is exponentially more difficult without the right support network.
+
+The 'Share with Others!' area enables people to do just that; they can view posts by anyone in the community and like and comment on their contributions. In this way, the community can inspire and uplift one another.
 
 ## Project Recreation
