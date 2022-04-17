@@ -31,7 +31,7 @@ if (isset($_FILES['file'])){
             $allowed_exts = ["jpg", "png", "jpeg", "bmp"];
             $explosion = explode(".", $img["name"]);
             $extension = end($explosion);
-            if (!in_array($extension, $allowed_exts)){
+            if (!in_array(strtolower($extension), $allowed_exts)){
                 $error = "Not a supported image type";
             } else {
                 // If there are no issues, then add post and image
