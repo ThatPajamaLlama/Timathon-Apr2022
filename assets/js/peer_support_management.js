@@ -312,3 +312,36 @@ function ShowNewPost(id, details) {
     var topPost = document.querySelectorAll(".post")[0];
     document.querySelector("#posts").insertBefore(newPost, topPost);
 }
+
+const mediaUpload = document.querySelector('#media-upload');
+const addButton = document.querySelector('#new-post .add-button');
+
+/*
+* Adds a file input; called when the user clicks 'Add image'
+* @param button - the button clicked by the user
+*/
+function AddFileUpload(button) {
+    var input = document.createElement("input");
+    input.setAttribute("name", "file");
+    input.setAttribute("id", "file");
+    input.setAttribute("type", "file");
+
+    var removeButton = document.createElement("a");
+    removeButton.setAttribute("class", "remove-button");
+    removeButton.setAttribute("onclick", "return RemoveFileUpload(this);");
+    removeButton.innerHTML = "<i class='fa fa-minus-circle' aria-hidden='true'></i>";
+
+    mediaUpload.appendChild(input);
+    mediaUpload.appendChild(removeButton);
+
+    button.style.display = 'None';
+}
+
+/*
+* Removes the file upload input; called when the user clicks the remove button
+* @param button - the button clicked by the user
+*/
+function RemoveFileUpload(button) {
+    button.parentNode.innerHTML = "";
+    addButton.style.display = 'flex';
+}

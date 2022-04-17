@@ -43,29 +43,3 @@ include "assets/inc/user_access_control.php";
 <script src="assets/js/tata.js"></script>
 
 <script src="assets/js/peer_support_management.js"></script>
-
-<script>
-    const mediaUpload = document.querySelector('#media-upload');
-    const addButton = document.querySelector('#new-post .add-button');
-    function AddFileUpload(button) {
-        var input = document.createElement("input");
-        input.setAttribute("name", "file");
-        input.setAttribute("id", "file");
-        input.setAttribute("type", "file");
-
-        var removeButton = document.createElement("a");
-        removeButton.setAttribute("class", "remove-button");
-        removeButton.setAttribute("onclick", "return RemoveFileUpload(this);");
-        removeButton.innerHTML = "<i class='fa fa-minus-circle' aria-hidden='true'></i>";
-
-        mediaUpload.appendChild(input);
-        mediaUpload.appendChild(removeButton);
-
-        button.style.display = 'None';
-    }
-
-    function RemoveFileUpload(button) {
-        button.parentNode.innerHTML = "";
-        addButton.style.display = 'flex';
-    }
-</script>

@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Adds the post to the database
+* @param conn - the database connection
+* @param username - the user's username
+* @param text - the text inputted by the user for the post
+* @param timestamp - the date/time that the post was created
+*/
 function create_post($conn, $username, $text, $timestamp) {
     $sqlNewPost = "INSERT INTO post (user_id, text, timestamp) VALUES (?, ?, ?)";
     $valuesNewPost = [
