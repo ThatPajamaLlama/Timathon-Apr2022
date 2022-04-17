@@ -39,6 +39,8 @@ include "assets/inc/user_access_control.php";
     </body>
 </html>
 
+<script src="assets/js/repeated_generator_clicks.js"></script>
+
 <script>
     const style = document.querySelector('#style');
     const name = style.querySelector('#name');
@@ -80,16 +82,6 @@ include "assets/inc/user_access_control.php";
         request.open("POST", url, true);
         request.send();
 
-        // Show text with animation when user clicks the button multiple times
-        if (counter == 2) {
-            multiclick.classList.add('active');
-        } else if (counter > 2) {
-            if (counter == 3) {
-                multiclick.classList.remove('active');
-            }
-            multiclick.classList.remove('jiggle');
-            void multiclick.offsetWidth;
-            multiclick.classList.add('jiggle');
-        }
+        MultipleClicks(counter);
     }
 </script>
