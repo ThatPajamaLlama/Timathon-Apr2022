@@ -605,6 +605,7 @@ section#startnow form input[type='submit']:hover {
 
 #peer-support .post .text p {
     padding-bottom: 5px;
+    overflow-wrap: break-word;
 }
 
 #peer-support .comment p {
