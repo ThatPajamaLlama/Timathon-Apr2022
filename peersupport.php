@@ -123,11 +123,13 @@ include "assets/inc/user_access_control.php";
                 request.open("POST", "assets/proc/create_comment_process.php", true);
                 request.send(data);
             }
-            
-        } else if (input.value.length >= input.maxLength) {
-            tata.warn('Max Characters Reached', 'Comment must not exceed ' + input.maxLength + ' characters.', {
-                position: 'br'
-            });
+        } else {
+            input.style.height = input.scrollHeight+'px';
+            if (input.value.length >= input.maxLength) {
+                tata.warn('Max Characters Reached', 'Comment must not exceed ' + input.maxLength + ' characters.', {
+                    position: 'br'
+                });
+            }
         }
     }
 
