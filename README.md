@@ -54,6 +54,11 @@ This feature is arguably one of the most complex in the application, and has pot
 
 Users can create multiple vision boards to express their personal goals visually as a method of staying inspired and motivated. This involves adding text and images which are displayed on a canvas.
 
+Regarding these vision boards:
+* They are saved everytime they are drawn, and are saved in the exact layout/styles that they were drawn in so that you can keep it in a format that you like
+* They save to a database making them accessible on other devices
+* I had never used HTML canvases before and I learned a lot by making this, making the feature a project highlight for me.
+
 **Bucket List**
 
 ![Bucket List](https://i.imgur.com/7zFNgqe.gif)
@@ -68,4 +73,20 @@ When attempting to do anything that requires a level of motivation, it is expone
 
 The 'Share with Others!' area enables people to do just that; they can view posts by anyone in the community and like and comment on their contributions. In this way, the community can inspire and uplift one another.
 
+**Points of Note**
+* AJAX has been utilised heavily to ensure that the user never has to leave the pages in the user area for scripts to execute.  In particular, the user never needs to refresh the peer support page to see new posts/comments/likes.
+* Validation and error handling were a big focus on ensuring the completed project is well-polished.
+* Security was considered for every feature. Additional PHP code is in place to ensure that users have not changed JS code to be able to amend/remove the vision boards or bucket lists of others.
+
 ## Project Recreation
+
+
+## Credit
+
+'To the Fullest' is a solo project developed by Shannon Norris (AKA ThatPajamaLlama)
+
+A couple of libraries were utilised in the solution:
+* [tata](https://github.com/xrr2016/tata) (toasts)
+* [chart.js](https://www.chartjs.org/) (used for piechart on bucket lists page)
+
+In addition to this, the quote text/authors shown on the dashboard page are from a [JSON file created by nasrulhazim](https://gist.github.com/nasrulhazim/54b659e43b1035215cd0ba1d4577ee80).
