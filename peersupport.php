@@ -15,7 +15,7 @@ include "assets/inc/user_access_control.php";
                     <section id="new-post">
                         <form onsubmit="return CreatePost(event, this);" method="post">
                             <div class="flex-container">
-                                <textarea id="post" name="post" placeholder="How did you make today a little less ordinary?" onkeyup="PostChange(event, this);" maxLength="255"></textarea>
+                                <textarea id="post" name="post" placeholder="How did you make today a little less ordinary?" oninput="PostChange(event, this);" maxLength="255"></textarea>
                                 <button type="submit"><i class="fa fa-share-square-o" aria-hidden="true"></i>Share</button>
                             </div>
                         </form>
@@ -97,7 +97,6 @@ include "assets/inc/user_access_control.php";
 
     function CreateComment(e, input) {
         if (e.key == "Enter"){
-            input.value = "";
             text = input.value.replace(/(\r\n|\n|\r)/gm, "");
             if (text == "") {
                 tata.error('Cannot Create Comment', 'Contents of comment must not be blank.', {
@@ -123,6 +122,7 @@ include "assets/inc/user_access_control.php";
                 request.open("POST", "assets/proc/create_comment_process.php", true);
                 request.send(data);
             }
+            input.value = "";
         } else {
             input.style.height = input.scrollHeight+'px';
             if (input.value.length >= input.maxLength) {

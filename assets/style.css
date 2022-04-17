@@ -548,6 +548,7 @@ section#startnow form input[type='submit']:hover {
     background-color: #eee;
     padding: 10px;
     margin: 10px 0;
+    overflow-wrap: break-word;
 }
 
 #peer-support .post .user {
