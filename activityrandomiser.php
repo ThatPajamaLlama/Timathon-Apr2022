@@ -10,8 +10,8 @@ include "assets/inc/user_access_control.php";
         <?php include "assets/inc/sidemenu.php";?>
         
         <main>
-            <div id="container" class="center-contents">
-                <div>
+            <div class="flex-container">
+                <section id="gen">
                     <section>
                         <button onclick="return GenerateActivity();">
                             <i class="fa fa-fort-awesome" aria-hidden="true"></i>
@@ -22,7 +22,13 @@ include "assets/inc/user_access_control.php";
                         <h1 id="name">&nbsp;</h1>
                         <div id="img" class="img"></div>
                     </section>
-                </div>
+                    <p id="multiclick">Clicking the button multiple times somewhat voids the point...</p>
+                </section>
+                <section id="info">
+                    <h1>What is this?</h1>
+                    <p>This is the activity randomiser, where you can press the 'Pick an Activity' button to randomly select an activity to complete today.</p>
+                    <p>Using this can allow you to make each day a little less ordinary, and perhaps try something new.</p>
+                </section>
             </div>
         </main>
 
@@ -36,7 +42,9 @@ include "assets/inc/user_access_control.php";
     const image = activity.querySelector('#img');
 
     var lastId = null;
+    var counter = 0;
     function GenerateActivity() {
+        counter++;
         var request = new XMLHttpRequest();
         request.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -56,5 +64,16 @@ include "assets/inc/user_access_control.php";
         }
         request.open("POST", url, true);
         request.send();
+
+        if (counter == 2) {
+            multiclick.classList.add('active');
+        } else if (counter > 2) {
+            if (counter == 3) {
+                multiclick.classList.remove('active');
+            }
+            multiclick.classList.remove('jiggle');
+            void multiclick.offsetWidth;
+            multiclick.classList.add('jiggle');
+        }
     }
 </script>

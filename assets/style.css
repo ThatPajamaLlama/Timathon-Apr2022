@@ -684,7 +684,12 @@ table.likes {
 
 
 
-/* --------------- Style Generator --------------- */
+/* --------------- Style Generator and Activity Randomiser --------------- */
+
+.generator main > .flex-container > section {
+    width: 50%;
+    padding: 80px;
+}
 
 .generator #container {
     height: 100%;
@@ -729,19 +734,18 @@ table.likes {
     display: block;
     padding-bottom: 20px;
     transition-duration: .3s;
+    color: #eee;
 }
 
 .generator button p {
     font-family: Elbrush;
     font-size: 16pt;
     transition-duration: .3s;
-}
-
-.generator section {
-    margin: 40px 0;
+    color: #eee;
 }
 
 .generator .random-item {
+    margin-top: 40px;
     background-color: #ddd;
     padding: 40px;
     border-radius: 5px;
@@ -769,6 +773,26 @@ table.likes {
     background-size: contain;
     background-position: 50% 50%;
     background-repeat: no-repeat;
+}
+
+.generator #multiclick {
+    opacity: 0;
+    padding: 20px 0;
+    font-style: italic;
+    text-align: center;
+}
+
+.generator #multiclick.active {
+    
+    animation-name: appear;
+    animation-duration: 1s;
+    opacity: 1;
+}
+
+.generator #multiclick.jiggle {
+    animation-name: jiggle;
+    animation-duration: .5s;
+    opacity: 1;
 }
 
 #style-generator #imgs .img {
@@ -1226,6 +1250,20 @@ table.likes {
         width: 80%;
     }
 
+    /* Style generator and activity randomiser */
+
+    .generator #info {
+        order: 1;
+    }
+
+    .generator #gen {
+        order: 2;
+    }
+
+    .generator #info, .generator #gen {
+        padding: 30px;
+        width: 100%;
+    }
 
     /* Vision boards and bucket lists */
 
