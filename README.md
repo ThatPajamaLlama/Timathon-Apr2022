@@ -23,11 +23,16 @@ The languages/technologies used in the development of this entry include:
 ![MySQL](https://img.shields.io/static/v1?label=&message=MySQL&color=00618a&style=flat&logo=MySQL&logoColor=white) 
 
 **Homepage**
+
 ![Homepage](https://i.imgur.com/IhLFi2C.gif)
 
 **Style Generator**
 
+![Style Generator](https://i.imgur.com/MaCFwul.gif)
+
 **Activity Randomiser**
+
+![Activity Randomiser](https://i.imgur.com/AV9Qi40.gif)
 
 **Vision Board**
 
