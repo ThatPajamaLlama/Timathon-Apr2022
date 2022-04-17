@@ -17,11 +17,20 @@ function CreatePost(e, form) {
         var request = new XMLHttpRequest();
         request.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                form.querySelector('#post').value = "";
-                UpdatePosts();
-                tata.success('Created Post', 'Thanks for sharing!', {
-                    position: 'br'
-                });
+                var error = this.responseText;
+                if (error == "") {
+                    form.querySelector('#post').value = "";
+                    form.querySelector('#file').value = null;
+                    RemoveFileUpload(form.querySelector('.remove-button'));
+                    UpdatePosts();
+                    tata.success('Created Post', 'Thanks for sharing!', {
+                        position: 'br'
+                    });
+                } else {
+                    tata.error('Cannot Create Post', error, {
+                        position: 'br'
+                    });
+                }
             }
         };
         request.open("POST", "assets/proc/create_post_process.php", true);
@@ -137,6 +146,9 @@ function DisplayPosts() {
                 details['text'].forEach(function(paragraph) {
                     html +=    "<p>" + paragraph + "</p>";
                 });
+                if (details['imageext'] != null) {
+                    html += "<img src='assets/img/social/" + id.replaceAll("'", "") + "." + details['imageext'] + "'/>"
+                }
                 html += "<table class='likes" + (details['userliked'] == 1 ? " active" : "") + "'>";
                 html += "<tr>";
                 html += "<td><a onclick='return PostLike(this);'><i class='fa fa-thumbs-up' aria-hidden='true'></i></a></td>";
@@ -280,7 +292,10 @@ function ShowNewPost(id, details) {
     html +=    "<div class='text'>";
     details['text'].forEach(function(paragraph) {
         html +=    "<p>" + paragraph + "</p>";
-    });     
+    });
+    if (details['imageext'] != null) {
+        html += "<img src='assets/img/social/" + id.replaceAll("'", "") + "." + details['imageext'] + "'/>"
+    }     
     html +=    "</div>";
     html += "<table class='likes" + (details['userliked'] == 1 ? " active" : "") + "'>";
     html += "<tr>";

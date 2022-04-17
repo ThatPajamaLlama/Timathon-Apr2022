@@ -18,6 +18,11 @@ include "assets/inc/user_access_control.php";
                                 <textarea id="post" name="post" placeholder="How did you make today a little less ordinary?" oninput="PostChange(event, this);" maxLength="255"></textarea>
                                 <button type="submit"><i class="fa fa-share-square-o" aria-hidden="true"></i>Share</button>
                             </div>
+                            <div id="media-upload">
+                                <!-- Filled in using JS when user clicks to add image -->
+                            </div>
+                            <a class="add-button" onclick="AddFileUpload(this);"><i class="fa fa-plus-circle" aria-hidden="true"></i><span>Image</span></a>
+                            
                         </form>
                     </section>
                     <section id="posts">
@@ -38,3 +43,29 @@ include "assets/inc/user_access_control.php";
 <script src="assets/js/tata.js"></script>
 
 <script src="assets/js/peer_support_management.js"></script>
+
+<script>
+    const mediaUpload = document.querySelector('#media-upload');
+    const addButton = document.querySelector('#new-post .add-button');
+    function AddFileUpload(button) {
+        var input = document.createElement("input");
+        input.setAttribute("name", "file");
+        input.setAttribute("id", "file");
+        input.setAttribute("type", "file");
+
+        var removeButton = document.createElement("a");
+        removeButton.setAttribute("class", "remove-button");
+        removeButton.setAttribute("onclick", "return RemoveFileUpload(this);");
+        removeButton.innerHTML = "<i class='fa fa-minus-circle' aria-hidden='true'></i>";
+
+        mediaUpload.appendChild(input);
+        mediaUpload.appendChild(removeButton);
+
+        button.style.display = 'None';
+    }
+
+    function RemoveFileUpload(button) {
+        button.parentNode.innerHTML = "";
+        addButton.style.display = 'flex';
+    }
+</script>

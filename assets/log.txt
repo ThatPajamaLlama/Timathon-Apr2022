@@ -1,0 +1,108 @@
+17-04-2022, 07:45 pm
+Error type: SQL
+SQL: SELECT post.id AS thisone, post.*, media.ext, COUNT(post_like.post_id) AS likes, (SELECT 1
+                                                                                        FROM post_like
+                                                                                        WHERE post_like.user_id = 'MyNameIsShannon'
+                                                                                        AND post_like.post_id = thisone) AS user_liked
+                FROM post
+                LEFT JOIN post_like ON post.id = post_like.post_id
+                GROUP BY post.id
+                ORDER BY post.id DESC
+Error: Unknown column 'media.ext' in 'field list'
+
+17-04-2022, 07:45 pm
+Error type: SQL
+SQL: SELECT post.id AS thisone, post.*, media.ext, COUNT(post_like.post_id) AS likes, (SELECT 1
+                                                                                        FROM post_like
+                                                                                        WHERE post_like.user_id = 'MyNameIsShannon'
+                                                                                        AND post_like.post_id = thisone) AS user_liked
+                FROM post
+                LEFT JOIN post_like ON post.id = post_like.post_id
+                GROUP BY post.id
+                ORDER BY post.id DESC
+Error: Unknown column 'media.ext' in 'field list'
+
+17-04-2022, 07:46 pm
+Error type: SQL
+SQL: SELECT post.id AS thisone, post.*, media.ext, COUNT(post_like.post_id) AS likes, (SELECT 1
+                                                                                        FROM post_like
+                                                                                        WHERE post_like.user_id = 'MyNameIsShannon'
+                                                                                        AND post_like.post_id = thisone) AS user_liked
+                FROM post
+                LEFT JOIN post_like ON post.id = post_like.post_id
+                GROUP BY post.id
+                ORDER BY post.id DESC
+Error: Unknown column 'media.ext' in 'field list'
+
+17-04-2022, 07:46 pm
+Error type: SQL
+SQL: SELECT post.id AS thisone, post.*, media.ext, COUNT(post_like.post_id) AS likes, (SELECT 1
+                                                                                        FROM post_like
+                                                                                        WHERE post_like.user_id = 'MyNameIsShannon'
+                                                                                        AND post_like.post_id = thisone) AS user_liked
+                FROM post
+                LEFT JOIN post_like ON post.id = post_like.post_id
+                GROUP BY post.id
+                ORDER BY post.id DESC
+Error: Unknown column 'media.ext' in 'field list'
+
+17-04-2022, 07:46 pm
+Error type: SQL
+SQL: SELECT post.id AS thisone, post.*, media.ext, COUNT(post_like.post_id) AS likes, (SELECT 1
+                                                                                        FROM post_like
+                                                                                        WHERE post_like.user_id = 'MyNameIsShannon'
+                                                                                        AND post_like.post_id = thisone) AS user_liked
+                FROM post
+                LEFT JOIN post_like ON post.id = post_like.post_id
+                GROUP BY post.id
+                ORDER BY post.id DESC
+Error: Unknown column 'media.ext' in 'field list'
+
+17-04-2022, 07:46 pm
+Error type: SQL
+SQL: SELECT post.id AS thisone, post.*, media.ext, COUNT(post_like.post_id) AS likes, (SELECT 1
+                                                                                        FROM post_like
+                                                                                        WHERE post_like.user_id = 'MyNameIsShannon'
+                                                                                        AND post_like.post_id = thisone) AS user_liked
+                FROM post
+                LEFT JOIN post_like ON post.id = post_like.post_id
+                GROUP BY post.id
+                ORDER BY post.id DESC
+Error: Unknown column 'media.ext' in 'field list'
+
+17-04-2022, 07:46 pm
+Error type: SQL
+SQL: SELECT post.id AS thisone, post.*, media.ext, COUNT(post_like.post_id) AS likes, (SELECT 1
+                                                                                        FROM post_like
+                                                                                        WHERE post_like.user_id = 'MyNameIsShannon'
+                                                                                        AND post_like.post_id = thisone) AS user_liked
+                FROM post
+                LEFT JOIN post_like ON post.id = post_like.post_id
+                GROUP BY post.id
+                ORDER BY post.id DESC
+Error: Unknown column 'media.ext' in 'field list'
+
+17-04-2022, 07:46 pm
+Error type: SQL
+SQL: SELECT post.id AS thisone, post.*, media.ext, COUNT(post_like.post_id) AS likes, (SELECT 1
+                                                                                        FROM post_like
+                                                                                        WHERE post_like.user_id = 'MyNameIsShannon'
+                                                                                        AND post_like.post_id = thisone) AS user_liked
+                FROM post
+                LEFT JOIN post_like ON post.id = post_like.post_id
+                GROUP BY post.id
+                ORDER BY post.id DESC
+Error: Unknown column 'media.ext' in 'field list'
+
+17-04-2022, 07:46 pm
+Error type: SQL
+SQL: SELECT post.id AS thisone, post.*, media.ext, COUNT(post_like.post_id) AS likes, (SELECT 1
+                                                                                        FROM post_like
+                                                                                        WHERE post_like.user_id = 'MyNameIsShannon'
+                                                                                        AND post_like.post_id = thisone) AS user_liked
+                FROM post
+                LEFT JOIN post_like ON post.id = post_like.post_id
+                GROUP BY post.id
+                ORDER BY post.id DESC
+Error: Unknown column 'media.ext' in 'field list'
+

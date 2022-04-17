@@ -1,3 +1,5 @@
+// Dynamic canvas sizing solution to rectify blurry canvas
+
 const myCanvas = document.querySelector('#board canvas');
 const originalHeight = myCanvas.height;
 const originalWidth = myCanvas.width;
@@ -53,3 +55,5 @@ function getObjectFitSize(
     y: (containerHeight - targetHeight) / 2
   };
 }
+
+// Credit: https://codepen.io/DoomGoober/pen/BaNMQXW

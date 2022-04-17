@@ -78,12 +78,13 @@ $conn = db_connect();
 $username = $_SESSION['username'];
 
 // Retrieve all posts from database
-$sqlAllPosts = "SELECT post.id AS thisone, post.*, COUNT(post_like.post_id) AS likes, (SELECT 1
+$sqlAllPosts = "SELECT post.id AS thisone, post.*, media.ext, COUNT(post_like.post_id) AS likes, (SELECT 1
                                                                                         FROM post_like
                                                                                         WHERE post_like.user_id = '$username'
                                                                                         AND post_like.post_id = thisone) AS user_liked
                 FROM post
                 LEFT JOIN post_like ON post.id = post_like.post_id
+                LEFT JOIN media ON post.id = media.post_id
                 GROUP BY post.id
                 ORDER BY post.id DESC";
 $rsAllPosts = db_query($conn, $sqlAllPosts);
@@ -98,6 +99,7 @@ for ($i = 1; $i <= mysqli_num_rows($rsAllPosts); $i++) {
     $username = $post['user_id'];
     $likes = $post['likes'];
     $userLiked = $post['user_liked'] == 1 ? "1" : "0";
+    $image = $post['ext'];
 
     $timestamp = new DateTime($post['timestamp']);
 
@@ -111,6 +113,7 @@ for ($i = 1; $i <= mysqli_num_rows($rsAllPosts); $i++) {
         "timestamp" => $timestamp,
         "timeago" => $timeAgo,
         "text" => $text,
+        "imageext" => $image,
         "likes" => $likes,
         "userliked" => $userLiked,
         "comments" => retrieve_comments($conn, $id, $currentDateTime)

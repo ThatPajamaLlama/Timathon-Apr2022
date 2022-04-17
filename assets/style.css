@@ -608,6 +608,14 @@ section#startnow form input[type='submit']:hover {
     overflow-wrap: break-word;
 }
 
+#peer-support .post img {
+    min-width: 40%;
+    max-width: 100%;
+    border: 3px solid white;
+    margin: 10px auto;
+    display: block;
+}
+
 #peer-support .comment p {
     padding: 3px 0;
 }
@@ -633,6 +641,44 @@ section#startnow form input[type='submit']:hover {
     padding-bottom: 5px;
 }
 
+#peer-support section#new-post .add-button {
+    cursor: pointer;
+    color: #333;
+    font-size: 13pt;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin: 10px 5px 0 5px;
+}
+
+#peer-support section#new-post .add-button:hover span {
+    text-decoration: underline;
+}
+
+#peer-support section#new-post .add-button i {
+    color: #8AC926;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #71a71a;
+    font-size: 20pt;
+    transition-duration: 0.3s;
+    padding-right: 5px;
+}
+
+#peer-support section#new-post .add-button:hover i {
+    transform: scale(1.3);
+}
+
+#peer-support section#new-post input[type='file']{
+    margin: 5px;
+}
+
+#peer-support section#new-post .remove-button {
+    color: #FF595E;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #ce4246;
+    font-size: 14pt;
+    cursor: pointer;
+}
 
 table.likes {
     border-spacing: 0;
