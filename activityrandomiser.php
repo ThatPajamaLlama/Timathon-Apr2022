@@ -43,8 +43,14 @@ include "assets/inc/user_access_control.php";
 
     var lastId = null;
     var counter = 0;
+
+    /*
+    * Randomly select and display an activity
+    */
     function GenerateActivity() {
         counter++;
+
+        // Use AJAX to randomly select activity from db
         var request = new XMLHttpRequest();
         request.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -65,12 +71,14 @@ include "assets/inc/user_access_control.php";
         request.open("POST", url, true);
         request.send();
 
+        // Show text with animation when user clicks the button multiple times
         if (counter == 2) {
             multiclick.classList.add('active');
         } else if (counter > 2) {
             if (counter == 3) {
                 multiclick.classList.remove('active');
             }
+            // Use jiggle class and ensure animation finishes
             multiclick.classList.remove('jiggle');
             void multiclick.offsetWidth;
             multiclick.classList.add('jiggle');

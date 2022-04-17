@@ -1,5 +1,10 @@
 <?php
-
+/*
+ * Work out and return how long ago a post/comment was made
+ * @param then - the datetime of when the post/comment was made
+ * @param now - the current datetime
+ * @return timeAgo - how long ago it was made
+ */
 function calculate_time_ago($then, $now) {
     $difference = (array) date_diff($now, $then);
 
@@ -13,7 +18,7 @@ function calculate_time_ago($then, $now) {
         $timeAgo = $difference['h'] . "h";
     } elseif ($difference['i'] > 0) {
         $timeAgo = $difference['i'] . "m";
-    } elseif ($difference['s'] < 10) {
+    } elseif ($difference['s'] < 5) {
         $timeAgo = "Just now";
     } else {
         $timeAgo = $difference['s'] . "s";
@@ -22,6 +27,11 @@ function calculate_time_ago($then, $now) {
     return $timeAgo;
 }
 
+/*
+ * Separate inputted text into paragraphs
+ * @param text - text inputted by user
+ * @return paragraphs - array of paragraphs
+ */
 function split_text($text) {
     $parts = explode("\\r\\n", $text);
     $paragraphs = [];
@@ -33,6 +43,13 @@ function split_text($text) {
     return $paragraphs;
 }
 
+/*
+ * Get all comments for post
+ * @param conn - database connection
+ * @param id - ID number of post
+ * @param currentDateTime - the current date/time
+ * @return comments - array of comments
+ */
 function retrieve_comments($conn, $id, $currentDateTime) {
     $rsComments = db_query($conn, "SELECT * FROM comment WHERE post_id = $id ORDER BY datetime ASC");
 
@@ -50,7 +67,6 @@ function retrieve_comments($conn, $id, $currentDateTime) {
             "timeago" => $timeAgo
         ];
     }
-
     return $comments;
 }
 
@@ -61,6 +77,7 @@ $conn = db_connect();
 
 $username = $_SESSION['username'];
 
+// Retrieve all posts from database
 $sqlAllPosts = "SELECT post.id AS thisone, post.*, COUNT(post_like.post_id) AS likes, (SELECT 1
                                                                                         FROM post_like
                                                                                         WHERE post_like.user_id = '$username'
@@ -74,6 +91,7 @@ $rsAllPosts = db_query($conn, $sqlAllPosts);
 $posts = [];
 $currentDateTime = new DateTime();
 
+// For each post, obtain all necessary details and add to the posts array
 for ($i = 1; $i <= mysqli_num_rows($rsAllPosts); $i++) {
     $post = mysqli_fetch_assoc($rsAllPosts);
     $id = $post['id'];
@@ -98,9 +116,6 @@ for ($i = 1; $i <= mysqli_num_rows($rsAllPosts); $i++) {
         "comments" => retrieve_comments($conn, $id, $currentDateTime)
     ];
 }
-
-// $pretty = json_encode($posts, JSON_PRETTY_PRINT);
-// echo "<pre>" . $pretty . "</pre>";
 
 print_r(json_encode($posts));
 

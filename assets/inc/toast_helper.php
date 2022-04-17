@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * Display toast from session variable
+ */
 function handle_toast() {
     if (isset($_SESSION['toast'])) {
         $type = $_SESSION['toast']['type'];

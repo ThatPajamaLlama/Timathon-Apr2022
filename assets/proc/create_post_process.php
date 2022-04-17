@@ -5,8 +5,8 @@ include "../inc/db_helper.php";
 $conn = db_connect();
 
 session_start();
-$username = db_input($conn, "username", "session");
-$text = db_input($conn, "post", "post");
+$username = $_SESSION['username'];
+$text = $_POST['post'];
 $timestamp = date_format(new DateTime(), "Y-m-d H:i:s");
 echo $timestamp;
 

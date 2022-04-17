@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Get all text elements for vision board
+ * @param conn - database connection
+ * @param id - ID number of the vision board
+ * @return text - array of text elements
+ */
 function get_text($conn, $id) {
     $sqlText = "SELECT * FROM vision_board_text WHERE vision_board_id = ?";
     $valuesText = [['i', $id]];
@@ -21,6 +27,12 @@ function get_text($conn, $id) {
     return $text;
 }
 
+/*
+ * Get all image elements for vision board
+ * @param conn - database connection
+ * @param id - ID number of the vision board
+ * @return images - array of image elements
+ */
 function get_images($conn, $id) {
     $sqlImages = "SELECT * FROM vision_board_image WHERE vision_board_id = ?";
     $valuesImages = [['i', $id]];
@@ -48,16 +60,11 @@ $conn = db_connect();
 
 $id = $_GET['id'];
 
-
+// Use methods to build an array of vision board elements
 $objects = [
     "text" => get_text($conn, $id),
     "images" => get_images($conn, $id)
 ];
-
-
-
-// $pretty = json_encode($objects, JSON_PRETTY_PRINT);
-// echo "<pre>" . $pretty . "</pre>";
 
 print_r(json_encode($objects));
 

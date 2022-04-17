@@ -20,10 +20,6 @@ for ($i = 1; $i <= mysqli_num_rows($rsList); $i++) {
     ];
 }
 
-
-// $pretty = json_encode($list, JSON_PRETTY_PRINT);
-// echo "<pre>" . $pretty . "</pre>";
-
 print_r(json_encode($list));
 
 ?>

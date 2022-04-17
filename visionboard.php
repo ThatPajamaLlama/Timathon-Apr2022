@@ -5,13 +5,17 @@ include "assets/inc/user_access_control.php";
 include "assets/inc/db_helper.php";
 $conn = db_connect();
 
-
-
+/*
+* Security to check if visionboard belongs to user
+* @param conn - the database connection
+*/
 function check_access($conn) {
     $sqlUser = "SELECT user_id FROM vision_board WHERE id = ?";
     $valuesUser = [['i', $_GET['id']]];
     $rsUser = db_prep_stmt($conn, $sqlUser, $valuesUser);
     $user = mysqli_fetch_assoc($rsUser)["user_id"];
+
+    // If visionboard does not belong to this user, send back to list of their visionboards w/ error
     if ($user != $_SESSION['username']) {
         $_SESSION['toast'] = [
             "type" => "error",
@@ -24,6 +28,10 @@ function check_access($conn) {
 
 check_access($conn);
 
+/*
+* Get name of visionboard using ID
+* @param conn - database connection
+*/
 function get_name($conn) {
     $sqlName = "SELECT name FROM vision_board WHERE id = ?";
     $valuesName = [['i', $_GET['id']]];

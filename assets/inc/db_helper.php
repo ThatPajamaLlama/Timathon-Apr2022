@@ -1,5 +1,8 @@
 <?php
 
+/*
+ * Establish a connection to the database using stored details, adding an error to the log if unable to.
+ */
 function db_connect(){
 	if (file_exists('assets/db.ini')){
 		$credentials = parse_ini_file('assets/db.ini');
@@ -12,13 +15,17 @@ function db_connect(){
 	if (!$conn){
 		$log = date("d-m-Y, h:i a") . PHP_EOL . "Error type: Connection" . PHP_EOL . "Error: " . mysqli_connect_error() . PHP_EOL . PHP_EOL;
 		file_put_contents('assets/log.txt', $log, FILE_APPEND);
-		header('Location: error.php?r=db');
 		die();
 	}
 
 	return $conn;
 }
 
+/*
+ * Execute an SQL query, logging an error if unable to.
+ * @param conn - database connection
+ * @param sql - SQL query to execute
+ */
 function db_query($conn, $sql){
 	$result = mysqli_query($conn, $sql);
 
@@ -34,13 +41,18 @@ function db_query($conn, $sql){
 			file_put_contents('../log.txt', $log, FILE_APPEND);
 		}
 
-		header('Location: error.php?r=db');
 		die();
 	}
 
 	return $result;
 }
 
+/*
+ * Create and execute a prepared statement
+ * @param conn - database connection
+ * @param sql - SQL query to bind parameters to and execute
+ * @param values - the parameters for the SQL query (as an array)
+ */
 function db_prep_stmt($conn, $sql, $values){
 	$param_type = '';
 	$num_values = count($values);
@@ -69,19 +81,4 @@ function db_prep_stmt($conn, $sql, $values){
 			];
 			$users = db_prep_stmt($conn, "SELECT * FROM user WHERE username = ? AND password = ?", $values);
 	*/
-}
-
-function db_input($conn, $name, $method){
-	switch ($method){
-		case "get":
-			$value = (isset($_GET[$name]) ? mysqli_real_escape_string($conn, $_GET[$name]) : "");
-			break;
-		case "post":
-			$value = (isset($_POST[$name]) ? mysqli_real_escape_string($conn, $_POST[$name]) : "");
-			break;
-		case "session":
-			$value = (isset($_SESSION[$name]) ? mysqli_real_escape_string($conn, $_SESSION[$name]) : "");
-			break;
-	}
-	return $value;
 }

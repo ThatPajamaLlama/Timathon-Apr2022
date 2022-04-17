@@ -50,6 +50,10 @@ include "assets/inc/user_access_control.php";
 
     var lastId = null;
     var counter = 0;
+
+    /*
+    * Selects and displays a style; called when the user clicks the 'Choose my Style!' button
+    */
     function GenerateStyle() {
         counter++;
         var request = new XMLHttpRequest();
@@ -67,6 +71,8 @@ include "assets/inc/user_access_control.php";
                 lastId = response["id"];
             }
         };
+
+        //Create the URL for the AJAX call, including the last style ID if there is one (to ensure they don't get the same one) 
         var url = "assets/proc/generate_style_process.php";
         if (lastId != null) {
             url += "?last=" + lastId;
@@ -74,6 +80,7 @@ include "assets/inc/user_access_control.php";
         request.open("POST", url, true);
         request.send();
 
+        // Show text with animation when user clicks the button multiple times
         if (counter == 2) {
             multiclick.classList.add('active');
         } else if (counter > 2) {

@@ -6,7 +6,7 @@ include "../inc/db_helper.php";
 $conn = db_connect();
 
 // Ensure user doesn't get same two styles in a row
-$last = db_input($conn, "last", "get");
+$last = isset($_GET['last']) ? $_GET['last'] : "";
 $sqlStyle = "SELECT * FROM style " . ($last == "" ? "" : "WHERE id <> $last") . " ORDER BY RAND() LIMIT 1";
 
 $rsStyle = db_query($conn, $sqlStyle);

@@ -1,7 +1,4 @@
 <?php
-
-use function PHPSTORM_META\sql_injection_subst;
-
 session_start();
 
 include "../inc/db_helper.php";

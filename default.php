@@ -108,6 +108,10 @@ include "assets/inc/toast_helper.php";
     const loginTab = document.getElementById('login');
     const passwordConfirmationInput = document.getElementById('password-confirmation');
 
+    /*
+    * Changes the tab between login and signup; called when the user clicks one of these options
+    * @param newtab - name ofthe tab that the user clicked (login or signup)
+    */
     function ChangeTab(newTab) {
         if (newTab == "login") {
             form.action = "assets/proc/login_process.php";

@@ -5,12 +5,14 @@ $conn = db_connect();
 
 $id = $_GET['id'];
 
+// Remove all text and images currently stored in database for this vision board
 $valuesClear = [['i', $id]];
 $sqlClear = "DELETE FROM vision_board_text WHERE vision_board_id = ?";
 $rsClear = db_prep_stmt($conn, $sqlClear, $valuesClear);
 $sqlClear = "DELETE FROM vision_board_image WHERE vision_board_id = ?";
 $rsClear = db_prep_stmt($conn, $sqlClear, $valuesClear);
 
+// Add each vision board element to the database
 $data = json_decode($_POST['data'], true);
 foreach ($data as $element) {
     if ($element["type"] == "text") {
@@ -28,7 +30,6 @@ foreach ($data as $element) {
         ];
         $rsInsertText = db_prep_stmt($conn, $sqlInsertText, $valuesInsertText);
     } else {
-        print_r($element);
         $details = $element["db"];
         $sqlInsertImage = "INSERT INTO vision_board_image (vision_board_id, path, width, height, x, y)
                             VALUES (?, ?, ?, ?, ?, ?)";
@@ -43,12 +44,5 @@ foreach ($data as $element) {
         $rsInsertImage = db_prep_stmt($conn, $sqlInsertImage, $valuesInsertImage);
     }
 }
-
-
-
-
-// $pretty = json_encode($data, JSON_PRETTY_PRINT);
-// print_r($data);
-
 
 ?>
