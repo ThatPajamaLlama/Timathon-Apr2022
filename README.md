@@ -22,6 +22,9 @@ The languages/technologies used in the development of this entry include:
 ![PHP](https://img.shields.io/static/v1?label=&message=PHP&color=8993be&style=flat&logo=PHP&logoColor=white) 
 ![MySQL](https://img.shields.io/static/v1?label=&message=MySQL&color=00618a&style=flat&logo=MySQL&logoColor=white) 
 
+**Homepage**
+![Homepage](https://i.imgur.com/IhLFi2C.gif)
+
 **Style Generator**
 
 **Activity Randomiser**
