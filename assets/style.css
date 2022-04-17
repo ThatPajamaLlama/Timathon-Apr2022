@@ -47,6 +47,27 @@ body {
     src: url('fnt/Elbrush.ttf');
 }
 
+/* Scroll bar */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #111;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
 /* --------------- Homepage --------------- */
   
 body#default {
@@ -801,7 +822,7 @@ table.likes {
     padding: 40px;
     height: 100vh;
     max-height: 100vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #vision-board #options h2 {
