@@ -185,10 +185,18 @@ function RemoveItem(button) {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            DisplayItems();
-            tata.success('Bucket List Changed', 'Item removed', {
-                position: 'br'
-            });
+            var error = this.responseText;
+            if (error == ""){
+                DisplayItems();
+                tata.success('Bucket List Changed', 'Item removed', {
+                    position: 'br'
+                });
+            } else {
+                tata.error('Unable to Remove', error, {
+                    position: 'br'
+                });
+            }
+            
         }
     };
     request.open("POST", "assets/proc/remove_bucket_list_item_process.php?id=" + itemId, true);
@@ -205,16 +213,25 @@ function ChangeCompletion(button) {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            DisplayItems();
-            if (completionStatus == 1) { 
-                tata.success('Bucket List Changed', 'Activity marked as complete', {
-                    position: 'br'
-                });
+            var error = this.responseText;
+            if (error == "") {
+                DisplayItems();
+                if (completionStatus == 1) { 
+                    tata.success('Bucket List Changed', 'Activity marked as complete', {
+                        position: 'br'
+                    });
+                } else {
+                    tata.success('Bucket List Changed', 'Activity marked as incomplete', {
+                        position: 'br'
+                    });
+                }
             } else {
-                tata.success('Bucket List Changed', 'Activity marked as incomplete', {
+                DisplayItems();
+                tata.error('Unable to Remove', error, {
                     position: 'br'
                 });
             }
+            
         }
     };
     var data = new FormData();
