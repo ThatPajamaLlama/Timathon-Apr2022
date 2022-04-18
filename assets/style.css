@@ -1202,9 +1202,9 @@ table.likes {
 }
 
 
-/* ------------------------------ Mobile Layouts ------------------------------ */
+/* ------------------------------ Other Layouts ------------------------------ */
 
-@media all and (max-width: 960px) {
+@media screen and (max-width: 960px), only screen and (max-device-width: 480px) {
 
     /* Global */
     .flex-container {
