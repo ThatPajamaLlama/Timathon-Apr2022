@@ -38,7 +38,7 @@ This is the landing area once users signup or login. It greets them to the websi
 
 ![Style Generator](https://i.imgur.com/MaCFwul.gif)
 
-The style generator is one of the most basic features of the application. Nevertheless, it has significant potential to make the day a little less ordinary, by randomly selecting a style for the user to wear.
+The style generator is one of the most basic features of the application. Nevertheless, it has significant potential to make the day a little less ordinary by randomly selecting a style for the user to wear.
 
 **Activity Randomiser**
 
@@ -63,7 +63,7 @@ Regarding these vision boards:
 
 ![Bucket List](https://i.imgur.com/7zFNgqe.gif)
 
-Users are able to create a bucket list of experiences/achievements they wish to achieve within their lifetime. Not only can they amend this to their hearts content, but they can also feel rewarded for their progress as a result of the progress section on hte right-hand side; this consists of a pie chart as well as encouraging words relating to their progress individually.
+Users are able to create a bucket list of experiences/achievements they wish to achieve within their lifetime. Not only can they amend this to their hearts content, but they can also feel rewarded for their progress as a result of the progress section on the right-hand side; this consists of a pie chart as well as encouraging words relating to their progress individually.
 
 **Sharing Platform**
 
@@ -74,7 +74,7 @@ When attempting to do anything that requires a level of motivation, it is expone
 The 'Share with Others!' area enables people to do just that; they can view posts by anyone in the community and like and comment on their contributions. In this way, the community can inspire and uplift one another.
 
 **Points of Note**
-* AJAX has been utilised heavily to ensure that the user never has to leave the pages in the user area for scripts to execute.  In particular, the user never needs to refresh the peer support page to see new posts/comments/likes.
+* AJAX has been utilised heavily to ensure that the user never has to leave the pages in the user area for scripts to execute.  In particular, the user never needs to refresh the peer support page to see new posts/comments/likes, and the JS code will only alter the aspects that need to be changed (e.g. individual timestamps, comment sections or like buttons) rather than re-rendering the entire area.
 * Validation and error handling were a big focus on ensuring the completed project is well-polished.
 * Security was considered for every feature. Additional PHP code is in place to ensure that users have not changed JS code to be able to amend/remove the vision boards or bucket lists of others.
 
@@ -86,7 +86,7 @@ If you'd like to set it up yourself, please follow these steps:
 1. Download/launch XAMPP
 2. Start the Apache and MySQL modules
 3. Download the project from this repo and save it in the XAMPP/htdocs directory
-4. On PHPMyAdmin, create a new database called 'Timathon' and import the database file included in this repo: 'timathon.sql'
+4. On PHPMyAdmin, create a new database called 'timathon' and import the database file included in this repo: 'timathon.sql'
 5. Navigate to localhost to view the website
 
 If you experience any issues with the database or have a login for PHPMyAdmin, then ensure the details in the db.ini file are accurate.
